@@ -20,10 +20,10 @@ const Graph = () => {
 
     const addEdge = ( f ,t,weight=0) => {
         if (!(f in vertList)) {
-            const nv = addVertex(f)
+            addVertex(f)
         }
         if(!(t in vertList)) {
-            const nnv = addVertex(t)
+            addVertex(t)
         }
         vertList[f].addNeighbor(vertList[t], weight)
     }

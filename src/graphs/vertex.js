@@ -13,7 +13,6 @@ const Vertex = (key) => {
         for (key in connectedTo) {
             console.log(key, connectedTo[key].getId)
         }
-        
     }
 
     const getConnections = () => {

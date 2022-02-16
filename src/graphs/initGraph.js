@@ -26,14 +26,14 @@ const {Graph} = require('./graph');
                 })
             })
         }
-        const vertList = g.getVertList()
+        /* const vertList = g.getVertList()
         for( let v in vertList) {
             const vertex = vertList[v]
             const connectionsObject = vertex.getConnections()
             for (let x of connectionsObject){
                 //console.log("( ",v," , ", x[0].getId()," )")
             }
-        }
+        } */
         return g
     }
 
@@ -79,9 +79,9 @@ const {Graph} = require('./graph');
         return y.getDistance()
     }
 
-    const startingVertex = getStartingVertex('loon',myGraph)
+    const startingVertex = getStartingVertex('lets',myGraph)
     binaryFirstSearch(myGraph, startingVertex) 
-    console.log(traverseGraph(myGraph.getVertex('nana')))
+    console.log(traverseGraph(myGraph.getVertex('meet')))
 })()
 
 
