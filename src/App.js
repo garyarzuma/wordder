@@ -8,6 +8,7 @@ function App() {
   const [toWord, setToWord] = useState('fool')
   const [minSteps, setMinSteps] = useState(null)
   const [answerArray, setAnswerArray] = useState([])
+  const [showSolution, setShowSolution] = useState(false)
 
   useEffect(() => {
     const from = wordList[Math.floor(Math.random()*(wordList.length))-1]
@@ -21,22 +22,27 @@ function App() {
     setMinSteps(answer[0])
     setAnswerArray(answer[1])
   },[fromWord,toWord])
-  
-  console.log(traverseGraph('ymca','snug'))
+
+  const handleSolutionClick = () => {
+    setShowSolution(!showSolution)
+  }
 
   return (
     <div className="App">
       <div>From: {fromWord}</div>
       <div>To:  {toWord}</div>
       <div>Minimum Steps: {minSteps}</div>
-      <div class="answer-list">
-        {answerArray.map(word => {
-          return (
-            <div class="answer">{word}----{'>'}</div>
-          )
-        })}
-        <div class="answer" >{toWord}</div>
-      </div>
+      <button onClick={handleSolutionClick}>{showSolution ? "Hide Solution":"Show Solution"}</button>
+      {showSolution && 
+        <div className="answer-list">
+          {answerArray.map(word => {
+            return (
+              <div key={word} className="answer">{word}----{'>'}</div>
+            )
+          })}
+          <div className="answer" >{toWord}</div>
+        </div>
+      }
     </div>
   );
 }
