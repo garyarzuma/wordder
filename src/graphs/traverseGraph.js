@@ -1,4 +1,3 @@
-
 const {binaryFirstSearch} = require('./utils/binaryFirstSearch');
 const {buildGraph} = require('./utils/buildGraph')
 
@@ -10,7 +9,7 @@ const traverseGraph = (fromWord,toWord) => {
         const nodeArray = []
         while (x.getPred() !== null ){
             x = x.getPred()
-            nodeArray.push(x.getId())
+            nodeArray.splice(0, 0, x.getId())
         }
         return [y.getDistance(), nodeArray]
     }

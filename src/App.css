@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.answer-list {
+  margin: auto;
+  padding: 10px;
+}
+
+.answer{
+  display: inline-block
+}

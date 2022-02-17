@@ -1,9 +1,10 @@
-const wordList = require("../word.js");
+const wordList = require("../wordLists/four_word_list.js");
 const {Graph} = require('../graphClasses/graph');
 
 const buildGraph = () => {
     const g = Graph()
     const d = {}
+
     wordList.forEach( word => {
         const len = word.length
         let i = 0
@@ -16,6 +17,7 @@ const buildGraph = () => {
             i++
         }
     })
+
     for (let bucket in d){
         d[bucket].forEach(word1 => {
             d[bucket].forEach( word2 => {
@@ -25,14 +27,7 @@ const buildGraph = () => {
             })
         })
     }
-    /* const vertList = g.getVertList()
-    for( let v in vertList) {
-        const vertex = vertList[v]
-        const connectionsObject = vertex.getConnections()
-        for (let x of connectionsObject){
-            //console.log("( ",v," , ", x[0].getId()," )")
-        }
-    } */
+    
     return g
 }
 
