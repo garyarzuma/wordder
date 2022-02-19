@@ -3,6 +3,8 @@ const {buildGraph} = require('./utils/buildGraph')
 
 const traverseGraph = (fromWord,toWord) => {
     const myGraph = buildGraph() 
+    const fromVertex = myGraph.getVertex(fromWord)
+    const toVertex = myGraph.getVertex(toWord)
 
     const traverseNodes = (y) => {
         let x = y 
@@ -14,8 +16,11 @@ const traverseGraph = (fromWord,toWord) => {
         return [y.getDistance(), nodeArray]
     }
 
-    binaryFirstSearch(myGraph, myGraph.getVertex(fromWord)) 
-    return traverseNodes(myGraph.getVertex(toWord))
+    if(fromVertex != null && toVertex != null) {
+        binaryFirstSearch(myGraph, fromVertex)
+        return traverseNodes(toVertex)
+    }
+    else return null
 }
 
 module.exports = {traverseGraph}

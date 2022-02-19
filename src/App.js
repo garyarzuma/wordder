@@ -10,19 +10,24 @@ function App() {
   const [answerArray, setAnswerArray] = useState([])
   const [showSolution, setShowSolution] = useState(false)
 
-  useEffect(() => {
-    const from = wordList[Math.floor(Math.random()*(wordList.length))-1]
-    const to = wordList[Math.floor(Math.random()*(wordList.length))-1]
+  useEffect(()=>{
+    let answer = null
+    let from = ''
+    let to = ''
+    while (answer === null || answer[0]<2){
+      from = wordList[Math.floor(Math.random()*(wordList.length))-1]
+      to = wordList[Math.floor(Math.random()*(wordList.length))-1]
+      answer = traverseGraph(from,to) //returns an array where [0] is the steps, [1] answer list
+      console.log(answer,from,to)
+    }
     setFromWord(from)
     setToWord(to)
-  }, []);
-
-  useEffect(()=>{
-    const answer = traverseGraph(fromWord,toWord) //returns an array where [0] is the steps, [1] answer list
     setMinSteps(answer[0])
-    setAnswerArray(answer[1])
-  },[fromWord,toWord])
+    setAnswerArray(answer[1])   
+  },[])
 
+  //console.log(traverseGraph('bldg','chic'))
+  
   const handleSolutionClick = () => {
     setShowSolution(!showSolution)
   }
