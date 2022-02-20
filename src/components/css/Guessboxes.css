@@ -1,0 +1,8 @@
+.guessBox {
+	border: none;
+    background-color: rgb(221, 221, 221);
+    resize: none;
+    outline: none;
+	text-align:center;
+	width: 3em
+}
