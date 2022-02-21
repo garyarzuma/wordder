@@ -6,7 +6,7 @@ const Guessboxes= ({setCurrentGuess, handleGuess}) => {
     const guess = useField('guess')
     const handleSubmit = (event) =>  {
         event.preventDefault()
-        setCurrentGuess(guess.value)
+        setCurrentGuess(guess.value.toLowerCase())
         guess.onReset()
     }
     return(
