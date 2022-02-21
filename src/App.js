@@ -12,13 +12,14 @@ function App() {
   const [toWord, setToWord] = useState('fool')
   const [minSteps, setMinSteps] = useState(null)
   const [answerArray, setAnswerArray] = useState([])
-  const [showSolution, setShowSolution] = useState(true)
+  const [showSolution, setShowSolution] = useState(false)
   const [currentGuess, setCurrentGuess] = useState()
   const [graph,setGraph] = useState(buildGraph())
   const [prevGuess,setPrevGuess] = useState('')
   const [correctGuessesArray, setCorrectGuessesArray] = useState([])
   const [message, setMessage] = useState(null)
   const [firstTime, setFirstTime] = useState(true)
+  const [tryAgain, setTryAgain] = useState(false)
 
   useEffect(()=>{
     handleNewGameClick()
@@ -58,8 +59,9 @@ function App() {
             setMessage(`Success! You found a Wordder in the minimum amount of ${correctGuessesArray.length+1} steps!`)
           }
           else{
-            setMessage(`Success! You found a Wordder in ${correctGuessesArray.length+1} steps!`)
+            setMessage(`Success! You found a Wordder in ${correctGuessesArray.length+1} steps! The minimum possible steps is ${minSteps}`)
           }
+          setTryAgain(true)
         }
         else{
           setPrevGuess(currentGuess)
@@ -76,6 +78,13 @@ function App() {
       console.log("BAD GUESS")
       setMessage("Guess was NOT a valid 4 letter word!")
     } 
+  }
+
+  const handleTryAgainClick =  () => {
+    setTryAgain(false)
+    setCorrectGuessesArray([])
+    setMessage(null)
+    setPrevGuess(fromWord)
   }
   
   const handleNewGameClick = () => {
@@ -98,6 +107,7 @@ function App() {
     setPrevGuess(from)
     setCorrectGuessesArray([])
     setMessage(null)
+    setTryAgain(false)
   }
 
   return (
@@ -113,10 +123,12 @@ function App() {
       <Guessboxes setCurrentGuess={setCurrentGuess} handleGuess={handleGuess}/>
       <Notification message={message}/>
       <button onClick={handleNewGameClick}>New Game</button>
+      {tryAgain &&
+        <button onClick={handleTryAgainClick}>Try Again</button>}
       <br/>
       <button onClick={handleSolutionClick}>{showSolution ? "Hide Possible Solution":"Show Possible Solution"}</button>
       {showSolution &&
-      <Solution toWord = {toWord} answerArray={answerArray}/> }
+        <Solution toWord = {toWord} answerArray={answerArray}/> }
     </div>
   );
 }
