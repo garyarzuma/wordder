@@ -7,6 +7,7 @@ const Guessboxes= ({setCurrentGuess, handleGuess}) => {
     const handleSubmit = (event) =>  {
         event.preventDefault()
         setCurrentGuess(guess.value)
+        //WEhandleGuess()
         guess.onReset()
     }
     return(

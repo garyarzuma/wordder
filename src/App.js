@@ -5,6 +5,7 @@ import { traverseGraph } from './graphs/traverseGraph';
 import Solution from './components/Solution'
 import Guessboxes from './components/Guessboxes'
 import {buildGraph} from './graphs/utils/buildGraph'
+import Notification from './components/Notification';
 
 function App() {
   const [fromWord, setFromWord] = useState('best')
@@ -12,14 +13,24 @@ function App() {
   const [minSteps, setMinSteps] = useState(null)
   const [answerArray, setAnswerArray] = useState([])
   const [showSolution, setShowSolution] = useState(true)
-  const [currentGuess, setCurrentGuess] = useState('curr')
+  const [currentGuess, setCurrentGuess] = useState()
   const [graph,setGraph] = useState(buildGraph())
-  const [prevGuess,setPrevGuess] = useState('prev')
+  const [prevGuess,setPrevGuess] = useState('')
   const [correctGuessesArray, setCorrectGuessesArray] = useState([])
+  const [message, setMessage] = useState(null)
+  const [firstTime, setFirstTime] = useState(true)
 
   useEffect(()=>{
     handleNewGameClick()
   },[])
+
+  useEffect(()=>{
+    if(firstTime){
+      setFirstTime(false)
+    }
+    else
+      handleGuess()
+  },[currentGuess])
 
   //console.log(traverseGraph('bldg','chic'))
   
@@ -43,15 +54,18 @@ function App() {
       if(goodGuess) {
         setPrevGuess(currentGuess)
         setCorrectGuessesArray([...correctGuessesArray, currentGuess])
+        setMessage("Good Guess!")
       }
-      else console.log("NOT ONE LETTER AWAY")
+      else{
+        console.log("NOT ONE LETTER AWAY")
+        setMessage("Guesses must be one letter apart!")
+      } 
     }
-    else console.log("BAD GUESS")
+    else {
+      console.log("BAD GUESS")
+      setMessage("Guess was NOT a valid 4 letter word!")
+    } 
   }
-
-  useEffect(()=>{
-    handleGuess()
-  }, [currentGuess])
   
   const handleNewGameClick = () => {
     let answer = null
@@ -71,8 +85,10 @@ function App() {
     setAnswerArray(answer[1])   
     setGraph(myGraph)
     setPrevGuess(from)
+    setCorrectGuessesArray([])
+    setMessage(null)
   }
-  
+
   return (
     <div className="App">
       <div>From: {fromWord}</div>
@@ -84,8 +100,10 @@ function App() {
         )
       })}
       <Guessboxes setCurrentGuess={setCurrentGuess} handleGuess={handleGuess}/>
-      <button onClick={handleSolutionClick}>{showSolution ? "Hide Solution":"Show Solution"}</button>
+      <Notification message={message}/>
       <button onClick={handleNewGameClick}>New Game</button>
+      <br/>
+      <button onClick={handleSolutionClick}>{showSolution ? "Hide Solution":"Show Solution"}</button>
       {showSolution &&
       <Solution toWord = {toWord} answerArray={answerArray}/> }
     </div>
