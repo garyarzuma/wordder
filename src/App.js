@@ -56,10 +56,10 @@ function App() {
         if(currentGuess === toWord){
           setCorrectGuessesArray([...correctGuessesArray, currentGuess])
           if(correctGuessesArray.length === minSteps){
-            setMessage(`Success! You found a Wordder in the minimum amount of ${correctGuessesArray.length+1} steps!`)
+            setMessage(`Success! You found a Wordder in the minimum amount of ${correctGuessesArray.length} steps!`)
           }
           else{
-            setMessage(`Success! You found a Wordder in ${correctGuessesArray.length+1} steps! The minimum possible steps is ${minSteps}`)
+            setMessage(`Success! You found a Wordder in ${correctGuessesArray.length} steps! The minimum possible steps is ${minSteps}`)
           }
           setTryAgain(true)
         }
