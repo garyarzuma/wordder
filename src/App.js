@@ -113,6 +113,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1>Welcome to Wordder!</h1>
       <div>From: {fromWord}</div>
       <div>To:  {toWord}</div>
       <div>Minimum Steps: {minSteps}</div>
