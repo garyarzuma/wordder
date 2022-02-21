@@ -11,29 +11,14 @@ function App() {
   const [toWord, setToWord] = useState('fool')
   const [minSteps, setMinSteps] = useState(null)
   const [answerArray, setAnswerArray] = useState([])
-  const [showSolution, setShowSolution] = useState(false)
+  const [showSolution, setShowSolution] = useState(true)
   const [currentGuess, setCurrentGuess] = useState('curr')
   const [graph,setGraph] = useState(buildGraph())
   const [prevGuess,setPrevGuess] = useState('prev')
+  const [correctGuessesArray, setCorrectGuessesArray] = useState([])
 
   useEffect(()=>{
-    let answer = null
-    let from = ''
-    let to = ''
-    let myGraph = buildGraph()
-    while (answer === null || answer[0]<2){
-      from = wordList[Math.floor(Math.random()*(wordList.length))-1]
-      to = wordList[Math.floor(Math.random()*(wordList.length))-1]
-      myGraph = buildGraph()
-      answer = traverseGraph(from,to) //returns an array where [0] is the steps, [1] answer list
-      //console.log(answer,from,to)
-    }
-    setFromWord(from)
-    setToWord(to)
-    setMinSteps(answer[0])
-    setAnswerArray(answer[1])   
-    setGraph(myGraph)
-    setPrevGuess(from)
+    handleNewGameClick()
   },[])
 
   //console.log(traverseGraph('bldg','chic'))
@@ -51,10 +36,14 @@ function App() {
       for (let nbr of myGuessConnections){
            if(nbr[0].getId() === prevGuess){
               goodGuess = true
+              
            } 
       }
       console.log(goodGuess)
-      if(goodGuess) setPrevGuess(currentGuess)
+      if(goodGuess) {
+        setPrevGuess(currentGuess)
+        setCorrectGuessesArray([...correctGuessesArray, currentGuess])
+      }
       else console.log("NOT ONE LETTER AWAY")
     }
     else console.log("BAD GUESS")
@@ -63,14 +52,40 @@ function App() {
   useEffect(()=>{
     handleGuess()
   }, [currentGuess])
-
+  
+  const handleNewGameClick = () => {
+    let answer = null
+    let from = ''
+    let to = ''
+    let myGraph = buildGraph()
+    while (answer === null || answer[0]<2){
+      from = wordList[Math.floor(Math.random()*(wordList.length))-1]
+      to = wordList[Math.floor(Math.random()*(wordList.length))-1]
+      myGraph = buildGraph()
+      answer = traverseGraph(from,to) //returns an array where [0] is the steps, [1] answer list
+      //console.log(answer,from,to)
+    }
+    setFromWord(from)
+    setToWord(to)
+    setMinSteps(answer[0])
+    setAnswerArray(answer[1])   
+    setGraph(myGraph)
+    setPrevGuess(from)
+  }
+  
   return (
     <div className="App">
-      <div>From: {prevGuess}</div>
+      <div>From: {fromWord}</div>
       <div>To:  {toWord}</div>
       <div>Minimum Steps: {minSteps}</div>
+      {correctGuessesArray.map( (guess) => {
+        return(
+          <div key={guess}>{guess}</div>
+        )
+      })}
       <Guessboxes setCurrentGuess={setCurrentGuess} handleGuess={handleGuess}/>
       <button onClick={handleSolutionClick}>{showSolution ? "Hide Solution":"Show Solution"}</button>
+      <button onClick={handleNewGameClick}>New Game</button>
       {showSolution &&
       <Solution toWord = {toWord} answerArray={answerArray}/> }
     </div>
