@@ -52,9 +52,20 @@ function App() {
       }
       console.log(goodGuess)
       if(goodGuess) {
-        setPrevGuess(currentGuess)
-        setCorrectGuessesArray([...correctGuessesArray, currentGuess])
-        setMessage("Good Guess!")
+        if(currentGuess === toWord){
+          setCorrectGuessesArray([...correctGuessesArray, currentGuess])
+          if(correctGuessesArray.length+1 === minSteps){
+            setMessage(`Success! You found a Wordder in the minimum amount of ${correctGuessesArray.length+1} steps!`)
+          }
+          else{
+            setMessage(`Success! You found a Wordder in ${correctGuessesArray.length+1} steps!`)
+          }
+        }
+        else{
+          setPrevGuess(currentGuess)
+          setCorrectGuessesArray([...correctGuessesArray, currentGuess])
+          setMessage("Good Guess!")
+        }
       }
       else{
         console.log("NOT ONE LETTER AWAY")
@@ -96,14 +107,14 @@ function App() {
       <div>Minimum Steps: {minSteps}</div>
       {correctGuessesArray.map( (guess) => {
         return(
-          <div key={guess}>{guess}</div>
+          <div key={Math.floor(Math.random()*(1000000))}>{guess}</div>
         )
       })}
       <Guessboxes setCurrentGuess={setCurrentGuess} handleGuess={handleGuess}/>
       <Notification message={message}/>
       <button onClick={handleNewGameClick}>New Game</button>
       <br/>
-      <button onClick={handleSolutionClick}>{showSolution ? "Hide Solution":"Show Solution"}</button>
+      <button onClick={handleSolutionClick}>{showSolution ? "Hide Possible Solution":"Show Possible Solution"}</button>
       {showSolution &&
       <Solution toWord = {toWord} answerArray={answerArray}/> }
     </div>
