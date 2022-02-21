@@ -82,7 +82,7 @@ function App() {
 
   const handleTryAgainClick =  () => {
     setTryAgain(false)
-    setCorrectGuessesArray([])
+    setCorrectGuessesArray([fromWord])
     setMessage(null)
     setPrevGuess(fromWord)
   }
@@ -105,9 +105,10 @@ function App() {
     setAnswerArray(answer[1])   
     setGraph(myGraph)
     setPrevGuess(from)
-    setCorrectGuessesArray([])
+    setCorrectGuessesArray([from])
     setMessage(null)
     setTryAgain(false)
+    setShowSolution(false)
   }
 
   return (
@@ -115,13 +116,16 @@ function App() {
       <div>From: {fromWord}</div>
       <div>To:  {toWord}</div>
       <div>Minimum Steps: {minSteps}</div>
-      {correctGuessesArray.map( (guess) => {
-        return(
-          <div key={Math.floor(Math.random()*(1000000))}>{guess}</div>
-        )
-      })}
-      <Guessboxes setCurrentGuess={setCurrentGuess} handleGuess={handleGuess}/>
       <Notification message={message}/>
+      <div className = "guessArray">
+        {correctGuessesArray.map( (guess) => {
+          return(
+            <div key={Math.floor(Math.random()*(1000000))}>{guess}</div>
+          )
+        })}
+      </div>
+      <Guessboxes setCurrentGuess={setCurrentGuess} handleGuess={handleGuess}/>
+      <br/>
       <button onClick={handleNewGameClick}>New Game</button>
       {tryAgain &&
         <button onClick={handleTryAgainClick}>Try Again</button>}

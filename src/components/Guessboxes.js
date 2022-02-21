@@ -1,6 +1,6 @@
 import React from "react"
 import {useField} from '../hooks/useField'
-import './css/Guessboxes.css';
+import './styles/Guessboxes.css';
 
 const Guessboxes= ({setCurrentGuess, handleGuess}) => {
     const guess = useField('guess')
