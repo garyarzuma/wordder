@@ -6,6 +6,7 @@ import Solution from './components/Solution'
 import Guessboxes from './components/Guessboxes'
 import {buildGraph} from './graphs/utils/buildGraph'
 import Notification from './components/Notification';
+let prevGuess = ''
 
 function App() {
   const [fromWord, setFromWord] = useState('best')
@@ -15,11 +16,11 @@ function App() {
   const [showSolution, setShowSolution] = useState(false)
   const [currentGuess, setCurrentGuess] = useState()
   const [graph,setGraph] = useState(buildGraph())
-  const [prevGuess,setPrevGuess] = useState('')
   const [correctGuessesArray, setCorrectGuessesArray] = useState([])
   const [message, setMessage] = useState(null)
   const [firstTime, setFirstTime] = useState(true)
   const [tryAgain, setTryAgain] = useState(false)
+   
 
   useEffect(()=>{
     handleNewGameClick()
@@ -64,7 +65,7 @@ function App() {
           setTryAgain(true)
         }
         else{
-          setPrevGuess(currentGuess)
+          prevGuess = currentGuess
           setCorrectGuessesArray([...correctGuessesArray, currentGuess])
           setMessage("Good Guess!")
         }
@@ -76,7 +77,9 @@ function App() {
     }
     else {
       console.log("BAD GUESS")
-      setMessage("Guess was NOT a valid 4 letter word!")
+      if(currentGuess !== '') {
+        setMessage("Guess was NOT a valid 4 letter word!")
+      }
     } 
   }
 
@@ -84,7 +87,7 @@ function App() {
     setTryAgain(false)
     setCorrectGuessesArray([fromWord])
     setMessage(null)
-    setPrevGuess(fromWord)
+    prevGuess = fromWord
   }
   
   const handleNewGameClick = () => {
@@ -104,11 +107,19 @@ function App() {
     setMinSteps(answer[0])
     setAnswerArray(answer[1])   
     setGraph(myGraph)
-    setPrevGuess(from)
+    prevGuess = from
     setCorrectGuessesArray([from])
     setMessage(null)
     setTryAgain(false)
     setShowSolution(false)
+  }
+
+  const handleClearClick = () => {
+    if(correctGuessesArray.length > 1){
+      setCorrectGuessesArray(correctGuessesArray.slice(0,-1))
+      prevGuess = correctGuessesArray[correctGuessesArray.length-2]
+      setCurrentGuess('')
+    }
   }
 
   return (
@@ -127,6 +138,7 @@ function App() {
       </div>
       <Guessboxes setCurrentGuess={setCurrentGuess} handleGuess={handleGuess}/>
       <br/>
+      <button onClick={handleClearClick}>Clear</button>
       <button onClick={handleNewGameClick}>New Game</button>
       {tryAgain &&
         <button onClick={handleTryAgainClick}>Try Again</button>}
