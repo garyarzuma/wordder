@@ -68,3 +68,18 @@ button {
 .guessArray{
   margin-top: 10px
 }
+
+.nav-container{
+  display:block;
+  background-color: rgb(197, 197, 197);
+  height: 30%;
+}
+
+.link{
+  text-decoration: none; 
+  color: black
+}
+
+.link:hover{
+  text-decoration: underline
+}
