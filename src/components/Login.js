@@ -2,7 +2,7 @@ import React from 'react';
 
 const Login = () => {
     const padding = {
-      "margin-top":"50px"
+      "marginTop":"50px"
     }
     return (
       <div style = {padding} className="login-container">

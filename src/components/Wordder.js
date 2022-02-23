@@ -10,19 +10,17 @@ import { useParams,  useNavigate } from 'react-router-dom'
 
 let prevGuess = ''
 
-const Wordder = () => {
-  const [fromWord, setFromWord] = useState('best')
-  const [toWord, setToWord] = useState('fool')
+const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, setCorrectGuessesArray} ) => {
+
   const [minSteps, setMinSteps] = useState(null)
   const [answerArray, setAnswerArray] = useState([])
   const [showSolution, setShowSolution] = useState(false)
   const [currentGuess, setCurrentGuess] = useState()
   const [graph,setGraph] = useState(buildGraph())
-  const [correctGuessesArray, setCorrectGuessesArray] = useState([])
   const [message, setMessage] = useState(null)
   const [firstTime, setFirstTime] = useState(true)
   const [tryAgain, setTryAgain] = useState(false)
-  let {fromCustWord,toCustWord} = useParams() 
+  let {fromCustWord,toCustWord,custGuessesString} = useParams() 
   const navigate = useNavigate()
 
   useEffect(()=>{
@@ -43,7 +41,6 @@ const Wordder = () => {
   //console.log(traverseGraph('bldg','chic'))
 
   const customURL = () => {
-    console.log("custom")
     let myGraph = buildGraph()
     let answer = traverseGraph(fromCustWord,toCustWord)
     if (answer === null){
@@ -56,7 +53,11 @@ const Wordder = () => {
     setAnswerArray(answer[1])   
     setGraph(myGraph)
     prevGuess = fromCustWord
-    setCorrectGuessesArray([fromCustWord])
+    if(custGuessesString){
+      let array = custGuessesString.split(" ")
+      setCorrectGuessesArray(array)
+    }
+    else setCorrectGuessesArray([fromCustWord])
     setMessage(null)
     setTryAgain(false)
     setShowSolution(false)
