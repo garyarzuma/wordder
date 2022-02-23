@@ -2,6 +2,8 @@ import './App.css';
 import React from 'react';
 import Wordder from './components/Wordder'
 import Menu from './components/Menu'
+import InvalidWords from './components/InvalidWords'
+import Login from './components/Login'
 
 import {
   BrowserRouter as Router,
@@ -15,9 +17,11 @@ import {
 function App() {
   
   const About = () => {
-   
+    const padding = {
+      "margin-top":"50px"
+    }
     return (
-      <div className="about-container">
+      <div style={padding} className="about-container">
         This is a great game. Trust me.
       </div>
     )
@@ -27,8 +31,10 @@ function App() {
     <div className="App">
       <Menu />
       <Routes>
-        <Route path="/" element={<Wordder />} /> 
         <Route path="/about" element={<About/>} /> 
+        <Route path="/:fromCustWord/:toCustWord" element={<Wordder />} /> 
+        <Route path="/invalidwords" element={<InvalidWords />} /> 
+        <Route path="/login" element={<Login />} /> 
       </Routes>
     </div>
   );

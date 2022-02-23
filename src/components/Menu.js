@@ -10,9 +10,9 @@ const Menu = () => {
     }
     return (
       <div className="nav-container">
-        <Link className="link" style={padding} to="/">Home</Link>
+        <Link className="link" style={padding} to={`/${'sage'}/${'fool'}`}>Home</Link>
         <Link className="link" style={padding} to="/about">About</Link>
-        <Link className="link" style={padding} to="/create-new">Login</Link>
+        <Link className="link" style={padding} to="/login">Login</Link>
       </div>
     )
   }

@@ -6,6 +6,7 @@ import Solution from './Solution'
 import Guessboxes from './Guessboxes'
 import {buildGraph} from '../graphs/utils/buildGraph'
 import Notification from './Notification';
+import { useParams,  useNavigate } from 'react-router-dom'
 
 let prevGuess = ''
 
@@ -21,11 +22,15 @@ const Wordder = () => {
   const [message, setMessage] = useState(null)
   const [firstTime, setFirstTime] = useState(true)
   const [tryAgain, setTryAgain] = useState(false)
-   
+  let {fromCustWord,toCustWord} = useParams() 
+  const navigate = useNavigate()
 
   useEffect(()=>{
-    handleNewGameClick()
-  },[])
+    if(fromCustWord !== undefined)
+      customURL()
+    else
+      handleNewGameClick()
+  },[fromCustWord])
 
   useEffect(()=>{
     if(firstTime){
@@ -36,6 +41,26 @@ const Wordder = () => {
   },[currentGuess])
 
   //console.log(traverseGraph('bldg','chic'))
+
+  const customURL = () => {
+    console.log("custom")
+    let myGraph = buildGraph()
+    let answer = traverseGraph(fromCustWord,toCustWord)
+    if (answer === null){
+      navigate('/invalidwords')
+      return
+    }
+    setFromWord(fromCustWord)
+    setToWord(toCustWord)
+    setMinSteps(answer[0])
+    setAnswerArray(answer[1])   
+    setGraph(myGraph)
+    prevGuess = fromCustWord
+    setCorrectGuessesArray([fromCustWord])
+    setMessage(null)
+    setTryAgain(false)
+    setShowSolution(false)
+  }  
   
   const handleSolutionClick = () => {
     setShowSolution(!showSolution)
@@ -95,24 +120,14 @@ const Wordder = () => {
     let answer = null
     let from = ''
     let to = ''
-    let myGraph = buildGraph()
     while (answer === null || answer[0]<2){
       from = wordList[Math.floor(Math.random()*(wordList.length))-1]
       to = wordList[Math.floor(Math.random()*(wordList.length))-1]
-      myGraph = buildGraph()
+      
       answer = traverseGraph(from,to) //returns an array where [0] is the steps, [1] answer list
       //console.log(answer,from,to)
     }
-    setFromWord(from)
-    setToWord(to)
-    setMinSteps(answer[0])
-    setAnswerArray(answer[1])   
-    setGraph(myGraph)
-    prevGuess = from
-    setCorrectGuessesArray([from])
-    setMessage(null)
-    setTryAgain(false)
-    setShowSolution(false)
+    navigate(`/${from}/${to}`)
   }
 
   const handleClearClick = () => {
