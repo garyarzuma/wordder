@@ -20,14 +20,18 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
   const [message, setMessage] = useState(null)
   const [firstTime, setFirstTime] = useState(true)
   const [tryAgain, setTryAgain] = useState(false)
+  const [endGameFreeze, setEndGameFreeze] = useState(false)
   let {fromCustWord,toCustWord,custGuessesString} = useParams() 
   const navigate = useNavigate()
+ 
 
   useEffect(()=>{
     if(fromCustWord !== undefined)
       customURL()
     else
-      handleNewGameClick()
+      if(!endGameFreeze){
+        handleNewGameClick()
+      }
   },[fromCustWord])
 
   useEffect(()=>{
@@ -35,10 +39,10 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
       setFirstTime(false)
     }
     else
+    if(!endGameFreeze) {
       handleGuess()
+    }
   },[currentGuess])
-
-  //console.log(traverseGraph('bldg','chic'))
 
   const customURL = () => {
     let myGraph = buildGraph()
@@ -68,7 +72,6 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
   }
 
   const handleGuess = () => {
-    //console.log(currentGuess, prevGuess)
     let goodGuess = true
     correctGuessesArray.forEach(word=>{
       if (word === currentGuess) {
@@ -86,7 +89,6 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
                 goodGuess = true
             } 
         }
-        console.log(goodGuess)
         if(goodGuess) {
           if(currentGuess === toWord){
             setCorrectGuessesArray([...correctGuessesArray, currentGuess])
@@ -97,6 +99,7 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
               setMessage(`Success! You found a Wordder in ${correctGuessesArray.length} steps! The minimum possible steps is ${minSteps}`)
             }
             setTryAgain(true)
+            setEndGameFreeze(true)
           }
           else{
             prevGuess = currentGuess
@@ -105,12 +108,10 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
           }
         }
         else{
-          console.log("NOT ONE LETTER AWAY")
           setMessage("Guesses must be one letter apart!")
         } 
       }
       else {
-        console.log("BAD GUESS")
         if(currentGuess !== '') {
           setMessage("Guess was NOT a valid 4 letter word!")
         }
@@ -122,6 +123,7 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
     setTryAgain(false)
     setCorrectGuessesArray([fromWord])
     setMessage(null)
+    setEndGameFreeze(false)
     prevGuess = fromWord
   }
   
@@ -129,12 +131,12 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
     let answer = null
     let from = ''
     let to = ''
+    setEndGameFreeze(false)
     while (answer === null || answer[0]<2){
       from = wordList[Math.floor(Math.random()*(wordList.length))-1]
       to = wordList[Math.floor(Math.random()*(wordList.length))-1]
       
       answer = traverseGraph(from,to) //returns an array where [0] is the steps, [1] answer list
-      //console.log(answer,from,to)
     }
     navigate(`/${from}/${to}`)
   }
