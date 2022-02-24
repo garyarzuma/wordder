@@ -104,7 +104,7 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
           else{
             prevGuess = currentGuess
             setCorrectGuessesArray([...correctGuessesArray, currentGuess])
-            setMessage("Good Guess!")
+            setMessage("Good!")
           }
         }
         else{
