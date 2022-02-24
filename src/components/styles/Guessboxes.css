@@ -8,5 +8,10 @@
 	height: 1.5em;
 	border-radius: 1em;
 	margin-top:10px;
-	font-size: 1em
+	font-size: 1em;
+	box-shadow: 2px 2px 4px #888888;
+}
+
+.guessBox:hover{
+	background-color: #c5c5c5;
 }

@@ -1,0 +1,12 @@
+.front-page-rules{
+    margin:auto;
+    margin-bottom: 30px;
+    width: 40%;
+    background: rgb(216, 216, 216);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+button:hover{
+    box-shadow: 2px 2px 4px #888888;
+}

@@ -1,4 +1,5 @@
 import '../App.css';
+import './styles/Wordder.css'
 import React, {useState, useEffect} from 'react';
 import wordList from '../graphs/wordLists/four_word_list.js'
 import { traverseGraph } from '../graphs/traverseGraph';
@@ -142,6 +143,7 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
   }
 
   const handleClearClick = () => {
+    setMessage(null)
     if(correctGuessesArray.length > 1){
       setCorrectGuessesArray(correctGuessesArray.slice(0,-1))
       prevGuess = correctGuessesArray[correctGuessesArray.length-2]
@@ -152,6 +154,7 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
   return (
     <div className="Home">
       <h1>Welcome to Wordder!</h1>
+      <div className="front-page-rules">Create a word ladder by entering words 1 letter apart from the starting word in hope of getting to the target word in as few steps as possible!</div>
       <div>From: {fromWord}</div>
       <div>To:  {toWord}</div>
       <div>Minimum Steps: {minSteps}</div>
