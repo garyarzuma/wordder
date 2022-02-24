@@ -68,46 +68,54 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
   }
 
   const handleGuess = () => {
-    console.log(currentGuess, prevGuess)
-    if(currentGuess in graph.getVertList()){
-      const myGuessVertex = graph.getVertex(currentGuess)
-      const myGuessConnections = myGuessVertex.getConnections()
-      let goodGuess = false
-      for (let nbr of myGuessConnections){
-           if(nbr[0].getId() === prevGuess){
-              goodGuess = true
-              
-           } 
+    //console.log(currentGuess, prevGuess)
+    let goodGuess = true
+    correctGuessesArray.forEach(word=>{
+      if (word === currentGuess) {
+        setMessage("Guesses can't repeat!")
+        goodGuess = false
       }
-      console.log(goodGuess)
-      if(goodGuess) {
-        if(currentGuess === toWord){
-          setCorrectGuessesArray([...correctGuessesArray, currentGuess])
-          if(correctGuessesArray.length === minSteps){
-            setMessage(`Success! You found a Wordder in the minimum amount of ${correctGuessesArray.length} steps!`)
+    })
+    if(goodGuess){
+      if(currentGuess in graph.getVertList()){
+        const myGuessVertex = graph.getVertex(currentGuess)
+        const myGuessConnections = myGuessVertex.getConnections()
+        let goodGuess = false
+        for (let nbr of myGuessConnections){
+            if(nbr[0].getId() === prevGuess){
+                goodGuess = true
+            } 
+        }
+        console.log(goodGuess)
+        if(goodGuess) {
+          if(currentGuess === toWord){
+            setCorrectGuessesArray([...correctGuessesArray, currentGuess])
+            if(correctGuessesArray.length === minSteps){
+              setMessage(`Success! You found a Wordder in the minimum amount of ${correctGuessesArray.length} steps!`)
+            }
+            else{
+              setMessage(`Success! You found a Wordder in ${correctGuessesArray.length} steps! The minimum possible steps is ${minSteps}`)
+            }
+            setTryAgain(true)
           }
           else{
-            setMessage(`Success! You found a Wordder in ${correctGuessesArray.length} steps! The minimum possible steps is ${minSteps}`)
+            prevGuess = currentGuess
+            setCorrectGuessesArray([...correctGuessesArray, currentGuess])
+            setMessage("Good Guess!")
           }
-          setTryAgain(true)
         }
         else{
-          prevGuess = currentGuess
-          setCorrectGuessesArray([...correctGuessesArray, currentGuess])
-          setMessage("Good Guess!")
-        }
+          console.log("NOT ONE LETTER AWAY")
+          setMessage("Guesses must be one letter apart!")
+        } 
       }
-      else{
-        console.log("NOT ONE LETTER AWAY")
-        setMessage("Guesses must be one letter apart!")
+      else {
+        console.log("BAD GUESS")
+        if(currentGuess !== '') {
+          setMessage("Guess was NOT a valid 4 letter word!")
+        }
       } 
     }
-    else {
-      console.log("BAD GUESS")
-      if(currentGuess !== '') {
-        setMessage("Guess was NOT a valid 4 letter word!")
-      }
-    } 
   }
 
   const handleTryAgainClick =  () => {
