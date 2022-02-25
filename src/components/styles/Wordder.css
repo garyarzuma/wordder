@@ -2,11 +2,21 @@
     margin:auto;
     margin-bottom: 30px;
     width: 40%;
+    min-width: 300px;
     background: rgb(216, 216, 216);
     border-radius: 10px;
     padding: 10px;
+    border: 4px solid black
 }
 
 button:hover{
     box-shadow: 2px 2px 4px #888888;
+}
+
+.start-target-minSteps-current-container{
+    display:flex;
+    margin: auto;
+    width: 40%;
+    min-width: 300px;
+    justify-content: space-around
 }

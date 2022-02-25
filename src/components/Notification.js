@@ -6,8 +6,14 @@ const Notification = ({ message }) => {
   if (message === null) {
     return null
   }
-  if(message.indexOf("Good") !== -1 || message.indexOf("Success") !== -1) {
+  if(message.indexOf("Success") !== -1) {
     myClass = "goodMessage"
+  }
+  else if(message.indexOf("Cold") !== -1){
+    myClass = "coldMessage"
+  }
+  else if(message.indexOf("Hot")!== -1){
+    myClass = "hotterMessage"
   }
   else{
     myClass = "error"

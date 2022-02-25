@@ -14,6 +14,7 @@ let prevGuess = ''
 const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, setCorrectGuessesArray} ) => {
 
   const [minSteps, setMinSteps] = useState(null)
+  const [hotOrColdSteps, setHotOrColdSteps] = useState(null)
   const [answerArray, setAnswerArray] = useState([])
   const [showSolution, setShowSolution] = useState(false)
   const [currentGuess, setCurrentGuess] = useState()
@@ -28,7 +29,7 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
 
   useEffect(()=>{
     if(fromCustWord !== undefined)
-      customURL()
+      initiateGame()
     else
       if(!endGameFreeze){
         handleNewGameClick()
@@ -45,7 +46,7 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
     }
   },[currentGuess])
 
-  const customURL = () => {
+  const initiateGame = () => {
     let myGraph = buildGraph()
     let answer = traverseGraph(fromCustWord,toCustWord)
     if (answer === null){
@@ -61,8 +62,13 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
     if(custGuessesString){
       let array = custGuessesString.split(" ")
       setCorrectGuessesArray(array)
+      prevGuess = array[array.length-1]
+      setHotOrColdSteps(traverseGraph(prevGuess,toWord)[0])
     }
-    else setCorrectGuessesArray([fromCustWord])
+    else{
+      setCorrectGuessesArray([fromCustWord])
+      setHotOrColdSteps(answer[0])
+    } 
     setMessage(null)
     setTryAgain(false)
     setShowSolution(false)
@@ -74,6 +80,7 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
 
   const handleGuess = () => {
     let goodGuess = true
+    console.log("correctGuessesArray in handleGuyess function: ",correctGuessesArray)
     correctGuessesArray.forEach(word=>{
       if (word === currentGuess) {
         setMessage("Guesses can't repeat!")
@@ -91,8 +98,9 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
             } 
         }
         if(goodGuess) {
-          if(currentGuess === toWord){
+          if(currentGuess === toWord){ //if the guess is ACTUALLY good it goes here
             setCorrectGuessesArray([...correctGuessesArray, currentGuess])
+            setHotOrColdSteps(0)
             if(correctGuessesArray.length === minSteps){
               setMessage(`Success! You found a Wordder in the minimum amount of ${correctGuessesArray.length} steps!`)
             }
@@ -105,7 +113,10 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
           else{
             prevGuess = currentGuess
             setCorrectGuessesArray([...correctGuessesArray, currentGuess])
-            setMessage("Good!")
+            let prevHotOrColdSteps = hotOrColdSteps
+            let newHotOrColdSteps = traverseGraph(prevGuess,toWord)[0]
+            setHotOrColdSteps(newHotOrColdSteps)
+            handleHotOrCold(prevHotOrColdSteps, newHotOrColdSteps)
           }
         }
         else{
@@ -126,6 +137,7 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
     setMessage(null)
     setEndGameFreeze(false)
     prevGuess = fromWord
+    setHotOrColdSteps(minSteps)
   }
   
   const handleNewGameClick = () => {
@@ -144,20 +156,39 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
 
   const handleClearClick = () => {
     setMessage(null)
+    setEndGameFreeze(false)
+    setTryAgain(false)
     if(correctGuessesArray.length > 1){
       setCorrectGuessesArray(correctGuessesArray.slice(0,-1))
       prevGuess = correctGuessesArray[correctGuessesArray.length-2]
       setCurrentGuess('')
+      setHotOrColdSteps(traverseGraph(prevGuess,toWord)[0])
+    }
+  }
+
+  const handleHotOrCold = (prevHotOrColdSteps, newHotOrColdSteps) => {
+    if(prevHotOrColdSteps > newHotOrColdSteps){
+      setMessage("Hotter!")
+    }
+    else if(prevHotOrColdSteps <= newHotOrColdSteps){
+      setMessage("Colder!")
     }
   }
 
   return (
     <div className="Home">
       <h1>Welcome to Wordder!</h1>
-      <div className="front-page-rules">Create a word ladder by entering words 1 letter apart from the starting word in hope of getting to the target word in as few steps as possible!</div>
-      <div>From: {fromWord}</div>
-      <div>To:  {toWord}</div>
-      <div>Minimum Steps: {minSteps}</div>
+      <div className="front-page-rules">Create a word ladder from the starting word to the target word in as few steps as possible!</div>
+      <div className="start-target-minSteps-current-container">
+        <div className="start-target-container">
+          <div>Starting Word: {fromWord}</div>
+          <div>Target Word:  {toWord}</div>
+        </div>
+        <div className="minSteps-currentSteps-container">
+          <div>Minimum Steps: {minSteps}</div>
+          <div>Current Steps: {hotOrColdSteps}</div>
+        </div>
+      </div>
       <Notification message={message}/>
       <div className = "guessArray">
         {correctGuessesArray.map( (guess) => {

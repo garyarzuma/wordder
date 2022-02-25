@@ -23,3 +23,31 @@
     width:auto;
     display: inline-block
   }
+
+  .coldMessage{
+    color: rgb(0, 140, 255);
+    background: lightgrey;
+    font-size: 20px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width:auto;
+    display: inline-block;
+    font-style: italic;
+  }
+
+  .hotterMessage{
+    color: rgb(255, 81, 0);
+    background: lightgrey;
+    font-size: 20px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width:auto;
+    display: inline-block;
+    font-style: italic;
+  }
