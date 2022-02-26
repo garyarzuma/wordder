@@ -30,6 +30,7 @@ const Wordder =  () => {
   const toWord = useSelector(state => state.toWord)
   const fromWord = useSelector(state => state.fromWord)
   const correctGuessesArray = useSelector(state => state.correctGuessesArray)
+
   let {fromCustWord,toCustWord} = useParams() 
   const navigate = useNavigate()
 
@@ -180,7 +181,12 @@ const Wordder =  () => {
   return (
     <div className="Home">
       <h1>Welcome to Wordder!</h1>
-      <div className="front-page-rules">Create a word ladder from the starting word to the target word in as few steps as possible!</div>
+      <div className="front-page-rules">
+        <div>Create a word ladder from the starting word to the target word in as few steps as possible!</div>
+        <br></br>
+        <div>Ex) DART to YARN</div>
+        <div>HART----{'>'}DART----{'>'}DART----{'>'}YARN</div>
+      </div>
       <div className="start-target-minSteps-current-container">
         <div className="start-target-container">
           <div>Starting Word: {fromWord}</div>
