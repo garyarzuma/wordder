@@ -8,14 +8,13 @@ import Guessboxes from './Guessboxes'
 import {buildGraph} from '../graphs/utils/buildGraph'
 import Notification from './Notification';
 import { useParams,  useNavigate } from 'react-router-dom'
-import { setToWord, setFromWord } from '../reducers/wordsReducer'
+import { setToWord, setFromWord, setCorrectGuessesArray } from '../reducers/wordsReducer'
 import { useSelector, useDispatch } from 'react-redux'
 
 let prevGuess = ''
 
 const Wordder =  () => {
 
-  const [correctGuessesArray, setCorrectGuessesArray] = useState([])
   const [minSteps, setMinSteps] = useState(null)
   const [hotOrColdSteps, setHotOrColdSteps] = useState(null)
   const [answerArray, setAnswerArray] = useState([])
@@ -30,6 +29,7 @@ const Wordder =  () => {
   const dispatch = useDispatch()
   const toWord = useSelector(state => state.toWord)
   const fromWord = useSelector(state => state.fromWord)
+  const correctGuessesArray = useSelector(state => state.correctGuessesArray)
   let {fromCustWord,toCustWord} = useParams() 
   const navigate = useNavigate()
 
@@ -65,8 +65,11 @@ const Wordder =  () => {
     setAnswerArray(answer[1])   
     setGraph(myGraph)
     prevGuess = fromCustWord
-    setCorrectGuessesArray([fromCustWord])
-    setHotOrColdSteps(answer[0])
+    if(correctGuessesArray.length < 1) {
+      dispatch(setCorrectGuessesArray([fromCustWord]))
+    }
+    const hotOrColdFrom = correctGuessesArray[correctGuessesArray.length-1] || fromCustWord
+    setHotOrColdSteps(traverseGraph(hotOrColdFrom, toCustWord)[0])
     setMessage(null)
     setTryAgain(false)
     setShowSolution(false)
@@ -91,13 +94,13 @@ const Wordder =  () => {
         const myGuessConnections = myGuessVertex.getConnections()
         let goodGuess = false
         for (let nbr of myGuessConnections){
-            if(nbr[0].getId() === prevGuess){
+            if(nbr[0].getId() === (correctGuessesArray[correctGuessesArray.length-1]||prevGuess)){
                 goodGuess = true
             } 
         }
         if(goodGuess) {
           if(currentGuess === toWord){ //if the guess is ACTUALLY good it goes here
-            setCorrectGuessesArray([...correctGuessesArray, currentGuess])
+            dispatch(setCorrectGuessesArray([...correctGuessesArray, currentGuess]))
             setHotOrColdSteps(0)
             if(correctGuessesArray.length === minSteps){
               setMessage(`Success! You found a Wordder in the minimum amount of ${correctGuessesArray.length} steps!`)
@@ -110,7 +113,7 @@ const Wordder =  () => {
           }
           else{
             prevGuess = currentGuess
-            setCorrectGuessesArray([...correctGuessesArray, currentGuess])
+            dispatch(setCorrectGuessesArray([...correctGuessesArray, currentGuess]))
             let prevHotOrColdSteps = hotOrColdSteps
             let newHotOrColdSteps = traverseGraph(prevGuess,toWord)[0]
             setHotOrColdSteps(newHotOrColdSteps)
@@ -131,7 +134,7 @@ const Wordder =  () => {
 
   const handleTryAgainClick =  () => {
     setTryAgain(false)
-    setCorrectGuessesArray([fromWord])
+    dispatch(setCorrectGuessesArray([fromWord]))
     setMessage(null)
     setEndGameFreeze(false)
     prevGuess = fromWord
@@ -149,6 +152,7 @@ const Wordder =  () => {
       
       answer = traverseGraph(from,to) //returns an array where [0] is the steps, [1] answer list
     }
+    dispatch(setCorrectGuessesArray([from]))
     navigate(`/${from}/${to}`)
   }
 
@@ -157,7 +161,7 @@ const Wordder =  () => {
     setEndGameFreeze(false)
     setTryAgain(false)
     if(correctGuessesArray.length > 1){
-      setCorrectGuessesArray(correctGuessesArray.slice(0,-1))
+      dispatch(setCorrectGuessesArray(correctGuessesArray.slice(0,-1)))
       prevGuess = correctGuessesArray[correctGuessesArray.length-2]
       setCurrentGuess('')
       setHotOrColdSteps(traverseGraph(prevGuess,toWord)[0])
