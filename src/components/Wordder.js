@@ -10,6 +10,8 @@ import Notification from './Notification';
 import { useParams,  useNavigate } from 'react-router-dom'
 import { setToWord, setFromWord, setCorrectGuessesArray } from '../reducers/wordsReducer'
 import { useSelector, useDispatch } from 'react-redux'
+import {handleHotOrCold} from '../utils/utilityFunctions'
+import Rules from './Rules'
 
 let prevGuess = ''
 
@@ -115,7 +117,7 @@ const Wordder =  () => {
             let prevHotOrColdSteps = hotOrColdSteps
             let newHotOrColdSteps = traverseGraph(prevGuess,toWord)[0]
             setHotOrColdSteps(newHotOrColdSteps)
-            handleHotOrCold(prevHotOrColdSteps, newHotOrColdSteps)
+            setMessage(handleHotOrCold(prevHotOrColdSteps, newHotOrColdSteps))
           }
         }
         else{
@@ -164,24 +166,10 @@ const Wordder =  () => {
     }
   }
 
-  const handleHotOrCold = (prevHotOrColdSteps, newHotOrColdSteps) => {
-    if(prevHotOrColdSteps > newHotOrColdSteps){
-      setMessage("Hotter!")
-    }
-    else if(prevHotOrColdSteps <= newHotOrColdSteps){
-      setMessage("Colder!")
-    }
-  }
-
   return (
     <div className="Home">
       <h1>Welcome to Wordder!</h1>
-      <div className="front-page-rules">
-        <div>Create a word ladder from the starting word to the target word in as few steps as possible!</div>
-        <br></br>
-        <div>Ex) DART to YARN</div>
-        <div>HART----{'>'}DART----{'>'}DART----{'>'}YARN</div>
-      </div>
+      <Rules />
       <div className="start-target-minSteps-current-container">
         <div className="start-target-container">
           <div>Starting Word: {fromWord}</div>
