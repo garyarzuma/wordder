@@ -8,11 +8,14 @@ import Guessboxes from './Guessboxes'
 import {buildGraph} from '../graphs/utils/buildGraph'
 import Notification from './Notification';
 import { useParams,  useNavigate } from 'react-router-dom'
+import { setToWord, setFromWord } from '../reducers/wordsReducer'
+import { useSelector, useDispatch } from 'react-redux'
 
 let prevGuess = ''
 
-const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, setCorrectGuessesArray} ) => {
+const Wordder =  () => {
 
+  const [correctGuessesArray, setCorrectGuessesArray] = useState([])
   const [minSteps, setMinSteps] = useState(null)
   const [hotOrColdSteps, setHotOrColdSteps] = useState(null)
   const [answerArray, setAnswerArray] = useState([])
@@ -23,9 +26,12 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
   const [firstTime, setFirstTime] = useState(true)
   const [tryAgain, setTryAgain] = useState(false)
   const [endGameFreeze, setEndGameFreeze] = useState(false)
-  let {fromCustWord,toCustWord,custGuessesString} = useParams() 
+
+  const dispatch = useDispatch()
+  const toWord = useSelector(state => state.toWord)
+  const fromWord = useSelector(state => state.fromWord)
+  let {fromCustWord,toCustWord} = useParams() 
   const navigate = useNavigate()
- 
 
   useEffect(()=>{
     if(fromCustWord !== undefined)
@@ -53,22 +59,14 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
       navigate('/invalidwords')
       return
     }
-    setFromWord(fromCustWord)
-    setToWord(toCustWord)
+    dispatch(setFromWord(fromCustWord))
+    dispatch(setToWord(toCustWord))
     setMinSteps(answer[0])
     setAnswerArray(answer[1])   
     setGraph(myGraph)
     prevGuess = fromCustWord
-    if(custGuessesString){
-      let array = custGuessesString.split(" ")
-      setCorrectGuessesArray(array)
-      prevGuess = array[array.length-1]
-      setHotOrColdSteps(traverseGraph(prevGuess,toWord)[0])
-    }
-    else{
-      setCorrectGuessesArray([fromCustWord])
-      setHotOrColdSteps(answer[0])
-    } 
+    setCorrectGuessesArray([fromCustWord])
+    setHotOrColdSteps(answer[0])
     setMessage(null)
     setTryAgain(false)
     setShowSolution(false)
