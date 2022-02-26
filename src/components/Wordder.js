@@ -186,7 +186,7 @@ const Wordder = ( {fromWord,setFromWord,toWord,setToWord, correctGuessesArray, s
         </div>
         <div className="minSteps-currentSteps-container">
           <div>Minimum Steps: {minSteps}</div>
-          <div>Current Steps: {hotOrColdSteps}</div>
+          <div>Current Minimum Steps: {hotOrColdSteps}</div>
         </div>
       </div>
       <Notification message={message}/>

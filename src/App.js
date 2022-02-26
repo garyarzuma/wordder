@@ -19,7 +19,7 @@ function App() {
 
   return (
     <div className="App">
-      <Menu fromWord={fromWord} toWord={toWord} correctGuessesArray={correctGuessesArray}/>
+      <Menu fromWord={fromWord} toWord={toWord}/>
       <Routes>
         <Route path="/howtoplay" element={<HowTo/>} /> 
         <Route path="/:fromCustWord/:toCustWord" 
@@ -31,14 +31,6 @@ function App() {
             correctGuessesArray = {correctGuessesArray}
             setCorrectGuessesArray = {setCorrectGuessesArray}
             />} /> 
-        <Route path="/:fromCustWord/:toCustWord/:custGuessesString/" 
-          element={<Wordder 
-            fromWord={fromWord} 
-            setFromWord={setFromWord}
-            toWord={toWord} 
-            setToWord={setToWord}
-            correctGuessesArray = {correctGuessesArray}
-            setCorrectGuessesArray = {setCorrectGuessesArray}/>} /> 
         <Route path="/invalidwords" element={<InvalidWords />} /> 
         <Route path="/login" element={<Login />} /> 
       </Routes>
