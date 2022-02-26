@@ -69,12 +69,6 @@ button {
   margin-top: 10px
 }
 
-.nav-container{
-  display:block;
-  background: rgb(216, 216, 216);
-  height: 30%;
-}
-
 .link{
   text-decoration: none; 
   color: black

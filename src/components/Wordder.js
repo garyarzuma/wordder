@@ -23,7 +23,6 @@ const Wordder =  () => {
   const [graph,setGraph] = useState(buildGraph())
   const [message, setMessage] = useState(null)
   const [firstTime, setFirstTime] = useState(true)
-  const [tryAgain, setTryAgain] = useState(false)
   const [endGameFreeze, setEndGameFreeze] = useState(false)
 
   const dispatch = useDispatch()
@@ -72,7 +71,6 @@ const Wordder =  () => {
     const hotOrColdFrom = correctGuessesArray[correctGuessesArray.length-1] || fromCustWord
     setHotOrColdSteps(traverseGraph(hotOrColdFrom, toCustWord)[0])
     setMessage(null)
-    setTryAgain(false)
     setShowSolution(false)
   }  
   
@@ -109,7 +107,6 @@ const Wordder =  () => {
             else{
               setMessage(`Success! You found a Wordder in ${correctGuessesArray.length} steps! The minimum possible steps is ${minSteps}`)
             }
-            setTryAgain(true)
             setEndGameFreeze(true)
           }
           else{
@@ -133,15 +130,6 @@ const Wordder =  () => {
     }
   }
 
-  const handleTryAgainClick =  () => {
-    setTryAgain(false)
-    dispatch(setCorrectGuessesArray([fromWord]))
-    setMessage(null)
-    setEndGameFreeze(false)
-    prevGuess = fromWord
-    setHotOrColdSteps(minSteps)
-  }
-  
   const handleNewGameClick = () => {
     let answer = null
     let from = ''
@@ -158,9 +146,16 @@ const Wordder =  () => {
   }
 
   const handleClearClick = () => {
+    dispatch(setCorrectGuessesArray([fromWord]))
     setMessage(null)
     setEndGameFreeze(false)
-    setTryAgain(false)
+    prevGuess = fromWord
+    setHotOrColdSteps(minSteps)
+  }
+
+  const handleUndoClick = () => {
+    setMessage(null)
+    setEndGameFreeze(false)
     if(correctGuessesArray.length > 1){
       dispatch(setCorrectGuessesArray(correctGuessesArray.slice(0,-1)))
       prevGuess = correctGuessesArray[correctGuessesArray.length-2]
@@ -207,10 +202,9 @@ const Wordder =  () => {
       </div>
       <Guessboxes setCurrentGuess={setCurrentGuess} handleGuess={handleGuess}/>
       <br/>
-      <button onClick={handleClearClick}>Clear</button>
+      <button onClick={handleUndoClick}>Undo</button>
       <button onClick={handleNewGameClick}>New Game</button>
-      {tryAgain &&
-        <button onClick={handleTryAgainClick}>Try Again</button>}
+      <button onClick={handleClearClick}>Clear ALL</button>
       <br/>
       <button onClick={handleSolutionClick}>{showSolution ? "Hide Possible Solution":"Show Possible Solution"}</button>
       {showSolution &&

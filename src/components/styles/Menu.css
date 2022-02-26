@@ -1,0 +1,15 @@
+.nav-container{
+    display:flex;
+    margin: auto;
+    width: 50%;
+    min-width: 300px;
+    justify-content: space-around;
+}
+
+.menu-container{
+    display: flex;
+    background: rgb(216, 216, 216);
+    height: 40px;
+    vertical-align: middle;
+    align-items: center;
+}
