@@ -1,4 +1,4 @@
-const binaryFirstSearch = (graph, start) => {
+const breadthFirstSearch = (graph, start) => {
     start.setDistance(0)
     start.setPred(null)
     const vertQueue = []
@@ -18,4 +18,4 @@ const binaryFirstSearch = (graph, start) => {
     }
 }
 
-module.exports = {binaryFirstSearch}
+module.exports = {breadthFirstSearch}

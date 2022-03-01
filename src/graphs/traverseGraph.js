@@ -1,4 +1,4 @@
-const {binaryFirstSearch} = require('./utils/binaryFirstSearch');
+const {breadthFirstSearch} = require('./utils/breadthFirstSearch');
 const {buildGraph} = require('./utils/buildGraph')
 
 const traverseGraph = (fromWord,toWord) => {
@@ -17,7 +17,7 @@ const traverseGraph = (fromWord,toWord) => {
     }
 
     if(fromVertex != null && toVertex != null) {
-        binaryFirstSearch(myGraph, fromVertex)
+        breadthFirstSearch(myGraph, fromVertex)
         return traverseNodes(toVertex)
     }
     else return null
