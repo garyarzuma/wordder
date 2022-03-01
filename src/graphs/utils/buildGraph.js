@@ -1,4 +1,4 @@
-const wordList = require("../wordLists/four_word_list.js");
+const wordList = require("../wordLists/esl_forum_word_list");
 const {Graph} = require('../graphClasses/graph');
 
 const buildGraph = () => {

@@ -1,7 +1,7 @@
 import '../App.css';
 import './styles/Wordder.css'
 import React, {useState, useEffect} from 'react';
-import wordList from '../graphs/wordLists/four_word_list.js'
+import wordList from '../graphs/wordLists/esl_forum_word_list.js'
 import { traverseGraph } from '../graphs/traverseGraph';
 import Solution from './Solution'
 import Guessboxes from './Guessboxes'
