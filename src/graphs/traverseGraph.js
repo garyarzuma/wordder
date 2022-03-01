@@ -1,7 +1,7 @@
 const {breadthFirstSearch} = require('./utils/breadthFirstSearch');
 const {buildGraph} = require('./utils/buildGraph')
 
-const traverseGraph = (fromWord,toWord) => {
+const traverseGraph = (fromWord,toWord, prevGuesses=[]) => {
     const myGraph = buildGraph() 
     const fromVertex = myGraph.getVertex(fromWord)
     const toVertex = myGraph.getVertex(toWord)
@@ -17,7 +17,7 @@ const traverseGraph = (fromWord,toWord) => {
     }
 
     if(fromVertex != null && toVertex != null) {
-        breadthFirstSearch(myGraph, fromVertex)
+        breadthFirstSearch(myGraph, fromVertex,prevGuesses)
         return traverseNodes(toVertex)
     }
     else return null

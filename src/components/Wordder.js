@@ -56,7 +56,7 @@ const Wordder =  () => {
 
   const initiateGame = () => {
     let myGraph = buildGraph()
-    let answer = traverseGraph(fromCustWord,toCustWord)
+    let answer = traverseGraph(fromCustWord,toCustWord,correctGuessesArray)
     if (answer === null){
       navigate('/invalidwords')
       return
@@ -71,7 +71,7 @@ const Wordder =  () => {
       dispatch(setCorrectGuessesArray([fromCustWord]))
     }
     const hotOrColdFrom = correctGuessesArray[correctGuessesArray.length-1] || fromCustWord
-    setHotOrColdSteps(traverseGraph(hotOrColdFrom, toCustWord)[0])
+    setHotOrColdSteps(traverseGraph(hotOrColdFrom, toCustWord,correctGuessesArray)[0])
     setMessage(null)
     setShowSolution(false)
   }  
@@ -115,7 +115,7 @@ const Wordder =  () => {
             prevGuess = currentGuess
             dispatch(setCorrectGuessesArray([...correctGuessesArray, currentGuess]))
             let prevHotOrColdSteps = hotOrColdSteps
-            let newHotOrColdSteps = traverseGraph(prevGuess,toWord)[0]
+            let newHotOrColdSteps = traverseGraph(prevGuess,toWord,correctGuessesArray)[0]
             setHotOrColdSteps(newHotOrColdSteps)
             setMessage(handleHotOrCold(prevHotOrColdSteps, newHotOrColdSteps))
           }
@@ -162,7 +162,7 @@ const Wordder =  () => {
       dispatch(setCorrectGuessesArray(correctGuessesArray.slice(0,-1)))
       prevGuess = correctGuessesArray[correctGuessesArray.length-2]
       setCurrentGuess('')
-      setHotOrColdSteps(traverseGraph(prevGuess,toWord)[0])
+      setHotOrColdSteps(traverseGraph(prevGuess,toWord,correctGuessesArray)[0])
     }
   }
 
