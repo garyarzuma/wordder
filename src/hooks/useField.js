@@ -7,6 +7,8 @@ export const useField = (type) => {
       setValue(event.target.value)
     }
 
+    const maxLength = 4
+
     const onReset = () => {
         setValue('')
     }
@@ -15,6 +17,7 @@ export const useField = (type) => {
       type,
       value,
       onChange,
-      onReset
+      onReset,
+      maxLength
     }
 }

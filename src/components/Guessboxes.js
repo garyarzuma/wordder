@@ -13,7 +13,7 @@ const Guessboxes= ({setCurrentGuess, handleGuess}) => {
     
         <div className="guessboxes">
             <form onSubmit={handleSubmit}>
-                <input className="guessBox" {...guess}/>
+                <input className="guessBox"  {...guess}/>
             </form>
         </div>
       
