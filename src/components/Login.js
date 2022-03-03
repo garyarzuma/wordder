@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import loginService from '../services/login'
 import GoogleLogin from 'react-google-login'
 import GoogleButton from 'react-google-button'
+import './styles/Login.css'
 
 const Login = () => {
 
@@ -35,7 +36,7 @@ const Login = () => {
       <GoogleLogin
         clientId= {process.env.REACT_APP_GOOGLE_CLIENT_ID}
         render={renderProps => (
-          <GoogleButton onClick={renderProps.onClick} disabled={renderProps.disabled}>Sign in with Google</GoogleButton>
+          <GoogleButton className='google-sign-in-button' onClick={renderProps.onClick} disabled={renderProps.disabled}>Sign in with Google</GoogleButton>
         )}
         onSuccess={handleLogin}
         onFailure={handleLogin}
