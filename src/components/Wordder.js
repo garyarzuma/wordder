@@ -1,16 +1,16 @@
-import '../App.css';
+import '../App.css'
 import './styles/Wordder.css'
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react'
 import wordList from '../graphs/wordLists/esl_forum_word_list.js'
-import { traverseGraph } from '../graphs/traverseGraph';
+import  traverseGraph from '../graphs/traverseGraph'
 import Solution from './Solution'
 import Guessboxes from './Guessboxes'
-import {buildGraph} from '../graphs/utils/buildGraph'
-import Notification from './Notification';
+import buildGraph  from '../graphs/utils/buildGraph'
+import Notification from './Notification'
 import { useParams,  useNavigate } from 'react-router-dom'
 import { setToWord, setFromWord, setCorrectGuessesArray } from '../reducers/wordsReducer'
 import { useSelector, useDispatch } from 'react-redux'
-import {handleHotOrCold} from '../utils/utilityFunctions'
+import { handleHotOrCold } from '../utils/utilityFunctions'
 import Rules from './Rules'
 
 let prevGuess = ''
@@ -32,19 +32,19 @@ const Wordder =  () => {
   const fromWord = useSelector(state => state.fromWord)
   const correctGuessesArray = useSelector(state => state.correctGuessesArray)
 
-  let {fromCustWord,toCustWord} = useParams() 
+  let { fromCustWord,toCustWord } = useParams()
   const navigate = useNavigate()
 
-  useEffect(()=>{
+  useEffect(() => {
     if(fromCustWord !== undefined)
       initiateGame()
     else
-      if(!endGameFreeze){
-        handleNewGameClick()
-      }
+    if(!endGameFreeze){
+      handleNewGameClick()
+    }
   },[fromCustWord])
 
-  useEffect(()=>{
+  useEffect(() => {
     if(firstTime){
       setFirstTime(false)
     }
@@ -64,7 +64,7 @@ const Wordder =  () => {
     dispatch(setFromWord(fromCustWord))
     dispatch(setToWord(toCustWord))
     setMinSteps(answer[0])
-    setAnswerArray(answer[1])   
+    setAnswerArray(answer[1])
     setGraph(myGraph)
     prevGuess = fromCustWord
     if(correctGuessesArray.length < 1) {
@@ -74,18 +74,18 @@ const Wordder =  () => {
     setHotOrColdSteps(traverseGraph(hotOrColdFrom, toCustWord,correctGuessesArray)[0])
     setMessage(null)
     setShowSolution(false)
-  }  
-  
+  }
+
   const handleSolutionClick = () => {
     setShowSolution(!showSolution)
   }
 
   const handleGuess = () => {
     let goodGuess = true
-    console.log("correctGuessesArray in handleGuyess function: ",correctGuessesArray)
-    correctGuessesArray.forEach(word=>{
+    console.log('correctGuessesArray in handleGuyess function: ',correctGuessesArray)
+    correctGuessesArray.forEach(word => {
       if (word === currentGuess) {
-        setMessage("Guesses can't repeat!")
+        setMessage('Guesses can\'t repeat!')
         goodGuess = false
       }
     })
@@ -95,9 +95,9 @@ const Wordder =  () => {
         const myGuessConnections = myGuessVertex.getConnections()
         let goodGuess = false
         for (let nbr of myGuessConnections){
-            if(nbr[0].getId() === (correctGuessesArray[correctGuessesArray.length-1]||prevGuess)){
-                goodGuess = true
-            } 
+          if(nbr[0].getId() === (correctGuessesArray[correctGuessesArray.length-1]||prevGuess)){
+            goodGuess = true
+          }
         }
         if(goodGuess) {
           if(currentGuess === toWord){ //if the guess is ACTUALLY good it goes here
@@ -121,14 +121,14 @@ const Wordder =  () => {
           }
         }
         else{
-          setMessage("Guesses must be one letter apart!")
-        } 
+          setMessage('Guesses must be one letter apart!')
+        }
       }
       else {
         if(currentGuess !== '') {
-          setMessage("Guess was NOT a valid 4 letter word!")
+          setMessage('Guess was NOT a valid 4 letter word!')
         }
-      } 
+      }
     }
   }
 
@@ -140,7 +140,7 @@ const Wordder =  () => {
     while (answer === null || answer[0]<2){
       from = wordList[Math.floor(Math.random()*(wordList.length))-1]
       to = wordList[Math.floor(Math.random()*(wordList.length))-1]
-      
+
       answer = traverseGraph(from,to) //returns an array where [0] is the steps, [1] answer list
     }
     dispatch(setCorrectGuessesArray([from]))
@@ -194,11 +194,11 @@ const Wordder =  () => {
       <button onClick={handleNewGameClick}>New Game</button>
       <button onClick={handleClearClick}>Clear ALL</button>
       <br/>
-      <button onClick={handleSolutionClick}>{showSolution ? "Hide Possible Solution":"Show Possible Solution"}</button>
+      <button onClick={handleSolutionClick}>{showSolution ? 'Hide Possible Solution':'Show Possible Solution'}</button>
       {showSolution &&
         <Solution toWord = {toWord} answerArray={answerArray}/> }
     </div>
-  );
+  )
 }
 
-export default Wordder;
+export default Wordder

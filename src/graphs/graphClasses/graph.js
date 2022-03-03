@@ -1,43 +1,43 @@
-const {Vertex} = require("./vertex.js")
+import  Vertex from './vertex.js'
 
 const Graph = () => {
-    let vertList = {}
-    let numVertices = 0
+  let vertList = {}
+  let numVertices = 0
 
-    const addVertex = (key) => {
-        numVertices = numVertices + 1
-        const newVertex = Vertex(key)
-        vertList[key] = newVertex
-        return newVertex
+  const addVertex = (key) => {
+    numVertices = numVertices + 1
+    const newVertex = Vertex(key)
+    vertList[key] = newVertex
+    return newVertex
+  }
+
+  const getVertex = (n) => {
+    if (n in vertList) {
+      return vertList[n]
     }
+    else return null
+  }
 
-    const getVertex = (n) => {
-        if (n in vertList) {
-            return vertList[n]
-        }
-        else return null
+  const addEdge = ( f ,t,weight=0) => {
+    if (!(f in vertList)) {
+      addVertex(f)
     }
-
-    const addEdge = ( f ,t,weight=0) => {
-        if (!(f in vertList)) {
-            addVertex(f)
-        }
-        if(!(t in vertList)) {
-            addVertex(t)
-        }
-        vertList[f].addNeighbor(vertList[t], weight)
+    if(!(t in vertList)) {
+      addVertex(t)
     }
+    vertList[f].addNeighbor(vertList[t], weight)
+  }
 
-    const getVertices = () => {
-        return Object.keys(vertList)
-    }
+  const getVertices = () => {
+    return Object.keys(vertList)
+  }
 
-    const getVertList = () => {
-        return vertList
-    }
+  const getVertList = () => {
+    return vertList
+  }
 
-    return {addVertex,getVertex, addEdge, getVertices, getVertList}
+  return { addVertex,getVertex, addEdge, getVertices, getVertList }
 }
 
-module.exports = {Graph}
+export default Graph
 

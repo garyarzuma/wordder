@@ -1,22 +1,22 @@
 import React from 'react'
-import './styles/Notification.css';
+import './styles/Notification.css'
 
 const Notification = ({ message }) => {
-  let myClass = ""
+  let myClass = ''
   if (message === null) {
     return null
   }
-  if(message.indexOf("Success") !== -1) {
-    myClass = "goodMessage"
+  if(message.indexOf('Success') !== -1) {
+    myClass = 'goodMessage'
   }
-  else if(message.indexOf("Cold") !== -1){
-    myClass = "coldMessage"
+  else if(message.indexOf('Cold') !== -1){
+    myClass = 'coldMessage'
   }
-  else if(message.indexOf("Hot")!== -1){
-    myClass = "hotterMessage"
+  else if(message.indexOf('Hot')!== -1){
+    myClass = 'hotterMessage'
   }
   else{
-    myClass = "error"
+    myClass = 'error'
   }
   return (
     <div className={myClass}>
