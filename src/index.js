@@ -4,10 +4,17 @@ import './index.css'
 import App from './App'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import wordsReducer from './reducers/wordsReducer'
+import { createStore , combineReducers } from 'redux'
 
-const store = createStore(wordsReducer)
+import wordsReducer from './reducers/wordsReducer'
+import userReducer from './reducers/userReducer'
+
+const reducer = combineReducers({
+  words: wordsReducer,
+  user: userReducer
+})
+
+const store = createStore(reducer)
 
 ReactDOM.render(
   <Router>

@@ -6,8 +6,8 @@ import {
 } from 'react-router-dom'
 
 const Menu = () => {
-  const toWord = useSelector(state => state.toWord)
-  const fromWord = useSelector(state => state.fromWord)
+  const toWord = useSelector(state => state.words.toWord)
+  const fromWord = useSelector(state => state.words.fromWord)
 
   return (
     <div className="menu-container">

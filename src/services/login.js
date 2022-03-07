@@ -1,9 +1,9 @@
 import axios from 'axios'
-const baseUrl = '/api/notes'
+const baseUrl = '/api/login'
 
-const getAll = async () => {
-  const request = await axios.get(baseUrl)
-  return request.data
+const login = async credentials => {
+  const response = await axios.post(baseUrl+'/wordderLogin', credentials)
+  return response.data
 }
 
-export default { getAll }
+export default { login }

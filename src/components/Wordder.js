@@ -28,10 +28,9 @@ const Wordder =  () => {
   const [endGameFreeze, setEndGameFreeze] = useState(false)
 
   const dispatch = useDispatch()
-  const toWord = useSelector(state => state.toWord)
-  const fromWord = useSelector(state => state.fromWord)
-  const correctGuessesArray = useSelector(state => state.correctGuessesArray)
-
+  const toWord = useSelector(state => state.words.toWord)
+  const fromWord = useSelector(state => state.words.fromWord)
+  const correctGuessesArray = useSelector(state => state.words.correctGuessesArray)
   let { fromCustWord,toCustWord } = useParams()
   const navigate = useNavigate()
 
