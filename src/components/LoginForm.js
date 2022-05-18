@@ -43,7 +43,7 @@ const LoginForm = () => {
       <div>
         email
         <input
-          id='username'
+          id='email'
           type="text"
           value={email}
           name="Email"

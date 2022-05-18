@@ -38,11 +38,11 @@ const CreateUserForm = ({ setShowCreateForm }) => {
   }
 
   return(
-    <form onSubmit={handleCreate} className="create-user-form-box">
+    <form className="create-user-form-box">
       <div>
         Email
         <input
-          id='username'
+          id='email'
           type="text"
           value={email}
           name="Email"
@@ -89,7 +89,7 @@ const CreateUserForm = ({ setShowCreateForm }) => {
           onChange={({ target }) => setLname(target.value)}
         />
       </div>
-      <button id='create-button' type="submit">Create</button>
+      <button id='create-button' onClick={handleCreate}>Create</button>
       <button id='cancel-button' onClick={handleCancel}>Cancel</button>
     </form>
   )
