@@ -2,12 +2,14 @@
 
 Create a word ladder by changing 1 letter at a time and creating valid words along the way. Can you get it the minimum amount of steps? 
 
+Try me here -> [playwordder.com](https://www.playwordder.com)
+
 Features:
 
     -Play 2022's hottest new game! No not wordle....WORDDER!
     -Create a word ladder with a starting word traversing to a ending word in as few steps possible.
     -Hotter! or Colder! prompts will help you out along the way. 
-    -Customize what words you can play with the address bar ex. [https://www.playwordder.com/trap/clap](https://www.playwordder.com/trap/clap)
+    -Customize what words you can play with the address bar ex. playwordder.com/trap/clap
     -Word bank of over 2000 vetted words so you don't run into a nightmare scenario!
     -Hosted on my own domain https://www.playwordder.com with custom SSL certificate I painstakingly implemented instead of using Heroku's like I should have :D
     
