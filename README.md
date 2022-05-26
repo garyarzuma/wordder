@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+# wordder
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Create a word ladder by changing 1 letter at a time and creating valid words along the way. Can you get it the minimum amount of steps? 
 
-## Available Scripts
+Try me here -> [playwordder.com](https://www.playwordder.com)
 
-In the project directory, you can run:
+Features:
 
-### `npm start`
+    -Play 2022's hottest new game! No not wordle....WORDDER!
+    -Create a word ladder with a starting word traversing to a ending word in as few steps possible.
+    -Hotter! or Colder! prompts will help you out along the way. 
+    -Customize what words you can play with the address bar ex. playwordder.com/trap/clap
+    -Word bank of over 2000 vetted words so you don't run into a nightmare scenario!
+    -Hosted on my own domain https://www.playwordder.com with custom SSL certificate I painstakingly implemented instead of using Heroku's like I should have :D
+    
+Demonstrated Skills:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    -Uses breadth first search on a graph to traverse word lists and created shortest path
+    -Uses React Redux to handle overall state of words and guesses. 
+    -Uses React Router to control the links and flow of multiple webpages in the site.
+    -Uses React Hooks like useState, useReducer, and useEffect to handle initialization and life cycle methods.
+    -Uses the create-react-app to start the backbone of this project.
+    -Uses React.js to handle all of the frontend using states, props and components with function based components.
+    -Styled with classic CSS with the beautiful design of an electrical engineer with the fashion sense of a lawn mower. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Future Ways to Improve:
 
-### `npm test`
+    -Currently working on a login system using Oath for Facebook, Google, and custom login with backend designed in Node.js and MongoDB using mongoose. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Overall project time: ~60 hours
+Date Completed: TBA
 
-### `npm run build`
+-Gary Arzumanyan
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Look how fun it is in GIF form!
+![sample](src/images/wordder-gif.gif)
