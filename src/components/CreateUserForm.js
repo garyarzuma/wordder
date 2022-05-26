@@ -9,6 +9,8 @@ const CreateUserForm = ({ setShowCreateForm }) => {
   const [email, setEmail] = useState()
   const [fname, setFname] = useState()
   const [lname, setLname] = useState()
+  const [errorMessage, setErrorMessage] = useState(null)
+
 
   const handleCreate = async (event) => {
     event.preventDefault()
@@ -16,6 +18,7 @@ const CreateUserForm = ({ setShowCreateForm }) => {
       const user = await loginService.signup({
         email, password, fname, lname
       })
+      setShowCreateForm(false)
       window.localStorage.setItem(
         'loggedUser', JSON.stringify(user)
       )
@@ -24,11 +27,14 @@ const CreateUserForm = ({ setShowCreateForm }) => {
       //dispatch(setUser(lname,fname,picUrl,password,email))
       setEmail('')
       setPassword('')
+      setPasswordConfirmation('')
+      setFname('')
+      setLname('')
     } catch (exception){
-      //setErrorMessage('Wrong Username or Password')
+      setErrorMessage('Error')
+      console.log('login error buddy' + exception)
       setTimeout(() => {
-        //setErrorMessage(null)
-        console.log('login error buddy')
+        setErrorMessage(null)
       }, 5000)
     }
   }
@@ -39,6 +45,7 @@ const CreateUserForm = ({ setShowCreateForm }) => {
 
   return(
     <form className="create-user-form-box">
+      <div className="errorMessageSigningUp">{errorMessage}</div>
       <div>
         Email
         <input
