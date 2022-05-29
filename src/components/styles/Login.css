@@ -1,7 +1,3 @@
-.google-sign-in-button{
-    margin: auto;
-}
-
 .create-login-form{
   position: fixed;
   background: #00000050;
@@ -9,4 +5,8 @@
   height: 100vh;
   top: 0;
   left: 0;
+}
+
+.login-container{
+  width:100%
 }
