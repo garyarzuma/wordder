@@ -13,7 +13,6 @@ const Menu = () => {
     <div className="menu-container">
       <div className="nav-container">
         <Link className="link" to={`/${fromWord}/${toWord}`}>Home</Link>
-        <Link className="link" to="/howtoplay">Rules</Link>
         <Link className="link" to="/login">Login</Link>
       </div>
     </div>
