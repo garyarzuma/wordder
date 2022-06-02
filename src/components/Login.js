@@ -19,11 +19,19 @@ const Login = () => {
           <CreateUserForm setShowCreateForm={(x) => setShowCreateForm(x)}/>
         </div>
       }
-      <LoginForm />
-      <div>OR</div>
-      <FbLogin />
-      <GoogleLogin />
-      <button onClick={() => setShowCreateForm(true)}>Sign Up</button>
+      <div className='row'>
+        <FbLogin />
+        <GoogleLogin />
+      </div>
+      <div className ="login-or" >
+        <div className="or-child-line">__________</div>
+        <div className="or-child"> OR </div>
+        <div className="or-child-line">__________</div>
+      </div>
+      <div className='row'>
+        <LoginForm />
+        <button onClick={() => setShowCreateForm(true)}>Sign Up</button>
+      </div>
     </div>
   )
 }

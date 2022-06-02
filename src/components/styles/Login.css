@@ -8,5 +8,31 @@
 }
 
 .login-container{
-  width:100%
+  width:200px;
+  background-color: gray;
+  display:flex;
+  margin: auto;
+  min-width: 300px;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+}
+
+.row{
+  width:auto;
+  padding:10px;
+}
+
+.login-or{
+  display: flex;
+  align-items: center;
+}
+
+.or-child{
+  padding:5px
+}
+
+.or-child-line{
+  padding:5px;
+  transform:translate(0px,-11px)
 }
