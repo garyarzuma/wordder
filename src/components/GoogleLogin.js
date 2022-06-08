@@ -1,5 +1,5 @@
 import GoogleLogin from 'react-google-login'
-import GoogleButton from 'react-google-button'
+//import GoogleButton from 'react-google-button'
 import React from 'react'
 import './styles/GoogleLogin.css'
 
@@ -24,7 +24,7 @@ function GoogleLg() {
     <GoogleLogin
       clientId= {process.env.REACT_APP_GOOGLE_CLIENT_ID}
       render={renderProps => (
-        <GoogleButton className='google-sign-in-button' onClick={renderProps.onClick} disabled={renderProps.disabled}>Sign in with Google</GoogleButton>
+        <button className='google-sign-in-button' onClick={renderProps.onClick} disabled={renderProps.disabled}>Sign in with Google</button>
       )}
       onSuccess={handleLogin}
       onFailure={handleLogin}
