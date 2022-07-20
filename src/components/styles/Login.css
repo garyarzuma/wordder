@@ -9,30 +9,23 @@
 
 .login-container{
   width:200px;
-  background-color: gray;
+  background-color: rgb(228, 228, 228);
   display:flex;
   margin: auto;
   min-width: 300px;
   align-items: center;
   flex-direction: column;
   padding: 30px;
+  border-radius: 10px;
+  border: .5px solid rgb(146, 146, 146);
 }
 
 .row{
   width:auto;
-  padding:10px;
+  margin: 5px 0 5px 0
 }
 
-.login-or{
-  display: flex;
-  align-items: center;
-}
-
-.or-child{
-  padding:5px
-}
-
-.or-child-line{
-  padding:5px;
-  transform:translate(0px,-11px)
+.new-member{
+  font-size:.7em;
+  text-align: left;
 }

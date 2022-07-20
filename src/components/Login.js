@@ -16,17 +16,15 @@ const Login = () => {
         </div>
       }
       <div className='row'>
+        <LoginForm />
+      </div>
+      <div className='row'>OR</div>
+      <div className='row'>
         <FbLogin />
         <GoogleLogin />
       </div>
-      <div className ="login-or" >
-        <div className="or-child-line">__________</div>
-        <div className="or-child"> OR </div>
-        <div className="or-child-line">__________</div>
-      </div>
       <div className='row'>
-        <LoginForm />
-        <div>
+        <div className="new-member">
           New member? Create an account {''}
           <a href='#' onClick={() => setShowCreateForm(true)}>here</a>
         </div>

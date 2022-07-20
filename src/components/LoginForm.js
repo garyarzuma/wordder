@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 //import { useSelector, useDispatch } from 'react-redux'
 //import { setUser } from '../reducers/userReducer'
 import loginService from '../services/login'
+import './styles/LoginForm.css'
 
 const LoginForm = () => {
 
@@ -41,23 +42,23 @@ const LoginForm = () => {
   return(
     <form onSubmit={handleLogin}>
       <div>
-        email
         <input
           id='email'
           type="text"
           value={email}
           name="Email"
           onChange={({ target }) => setEmail(target.value)}
+          placeholder="Email"
         />
       </div>
       <div>
-        password
         <input
           id='password'
           type="password"
           value={password}
           name="Password"
           onChange={({ target }) => setPassword(target.value)}
+          placeholder="Password"
         />
       </div>
       <button id='login-button' type="submit">login</button>

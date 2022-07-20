@@ -8,9 +8,10 @@
 
 .menu-container{
     display: flex;
-    background: rgb(216, 216, 216);
+    background: rgb(236, 236, 236);
     height: 40px;
     vertical-align: middle;
     align-items: center;
     margin-bottom: 30px;
+    border-bottom: .5px solid rgb(146, 146, 146)
 }

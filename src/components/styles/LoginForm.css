@@ -1,0 +1,19 @@
+input{
+    border: 1px solid rgb(136, 136, 136);
+      background-color: rgb(255, 255, 255);
+      resize: none;
+      outline: none;
+    text-align:left;
+    width: 250px;
+    height: 1.5em;
+    border-radius: 10px;
+    font-size: .8em;
+    margin: 5px 0 5px 0;
+    box-sizing: border-box;
+    padding-left: 10px;
+    font-family: myFirstFont;
+  }
+
+  input:focus{
+    border:2px solid rgb(146, 146, 146)
+  }

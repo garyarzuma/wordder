@@ -1,7 +1,12 @@
 .App {
   text-align: center;
   font-size: 1.5em;
-  font-family:Arial, Helvetica, sans-serif
+  font-family: myFirstFont, Arial, Helvetica, sans-serif;
+}
+
+@font-face {
+  font-family: myFirstFont;
+  src: url(fonts/Dosis-SemiBold.ttf);
 }
 
 .App-logo {
@@ -49,20 +54,14 @@
 }
 
 button {
-  font-family: Futura, sans-serif;
-  font-weight: 200;
-  font-style: normal;
-  letter-spacing: 0.1em;
   text-transform: uppercase;
-  font-size: 11px;
-  background-color: black;
-  color: white;
+  font-family: myFirstFont;
   padding: 5px 10px 5px 10px;
   border-radius: 5px;
+  border: .5px solid rgb(146, 146, 146);
   width: 13em;
   cursor: pointer;
   margin: 6px;
-  font-size: .6em;
 }
 
 .guessArray{
