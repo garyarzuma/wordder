@@ -45,59 +45,67 @@ const CreateUserForm = ({ setShowCreateForm }) => {
 
   return(
     <form className="create-user-form-box">
+      <div className="header">Create New Account</div>
       <div className="errorMessageSigningUp">{errorMessage}</div>
       <div>
-        Email
         <input
+          className='input-box'
           id='email'
           type="text"
           value={email}
           name="Email"
           onChange={({ target }) => setEmail(target.value)}
+          placeholder = 'Email'
         />
       </div>
       <div>
-        Password
         <input
+          className='input-box'
           id='password'
           type="password"
           value={password}
           name="Password"
           onChange={({ target }) => setPassword(target.value)}
+          placeholder = 'Password'
         />
       </div>
       <div>
-        Password Confirmation:
         <input
+          className='input-box'
           id='passwordC'
           type="password"
           value={passwordConfirmation}
           name="PasswordConfirmation"
           onChange={({ target }) => setPasswordConfirmation(target.value)}
+          placeholder = 'Confirm Password'
         />
       </div>
       <div>
-        First Name
         <input
+          className='input-box'
           id='fname'
           type="text"
           value={fname}
           name="Fname"
           onChange={({ target }) => setFname(target.value)}
+          placeholder = 'First Name'
         />
       </div>
       <div>
-        Last Name
         <input
+          className='input-box'
           id='lname'
           type="text"
           value={lname}
           name="Lname"
           onChange={({ target }) => setLname(target.value)}
+          placeholder = 'Last Name'
         />
       </div>
-      <button id='create-button' onClick={handleCreate}>Create</button>
-      <button id='cancel-button' onClick={handleCancel}>Cancel</button>
+      <div className='buttons-container'>
+        <button id='create-button' onClick={handleCreate}>Create</button>
+        <button id='cancel-button' onClick={handleCancel}>Cancel</button>
+      </div>
     </form>
   )
 }
