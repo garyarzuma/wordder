@@ -1,6 +1,28 @@
 .fb-button{
     width: 250px;
-    background-color: rgb(24,118,242);
-    border-radius:0;
-    color:white
+    height: 35px;
+    background-color: rgb(66,103,178);
+    border-radius:5px;
+    color:white;
+    font-family: facebookFont;
+    text-transform:none;
+    
 }
+
+@font-face {
+    font-family: facebookFont;
+    src: url(../../fonts/TAHOMABD.TTF);
+}
+
+.facebook-icon{
+    color:white;
+    background-color:rgb(66,103,178);
+    border-radius:103333300px;
+    background: radial-gradient(rgb(66,103,178) 10px);
+    border: 0px solid white;
+    transform: translate(43px,4px);
+  }
+
+  .facebook-button-container{
+    transform: translate(-12px,0px);
+  }
