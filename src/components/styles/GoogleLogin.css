@@ -1,4 +1,23 @@
 .google-sign-in-button{
-    margin: auto;
-    width: 250px
+    width: 250px;
+    font-family: googleFont;
+    font-size: 15px;
+    height: 35px;
+    text-transform: none;
+    color: grey;
+    background-color: white;
+}
+
+@font-face {
+    font-family: googleFont;
+    src: url(../../fonts/Roboto-Medium.ttf);
+}
+
+.google-button-container{
+    transform: translate(-12px,0px);
+}
+
+.google-icon{
+    width:9%;
+    transform: translate(50px,9px);
 }
