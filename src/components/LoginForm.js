@@ -1,16 +1,13 @@
 import React, { useState } from 'react'
-//import { useSelector, useDispatch } from 'react-redux'
-//import { setUser } from '../reducers/userReducer'
+import { useDispatch } from 'react-redux'
+import { setUser } from '../reducers/userReducer'
 import loginService from '../services/login'
 import './styles/LoginForm.css'
 
 const LoginForm = () => {
 
-  //const dispatch = useDispatch()
-  //const fname = useSelector(state => state.user.fname)
-  //const lname = useSelector(state => state.user.lname)
-  //const picUrl = useSelector(state => state.user.picUrl)
-  // const reduxEmail = useSelector(state => state.user.email)
+  const dispatch = useDispatch()
+
   const [password, setPassword] = useState()
   const [email, setEmail] = useState()
 
@@ -25,9 +22,12 @@ const LoginForm = () => {
       )
       //blogService.setToken(user.token)
       console.log(user)
-      //dispatch(setUser(lname,fname,picUrl,password,email))
+
+      dispatch(setUser(user.user.lname,user.user.fname,null,user.user.email))
+
       setEmail('')
       setPassword('')
+
     } catch (exception){
       //setErrorMessage('Wrong Username or Password')
       setTimeout(() => {
@@ -35,8 +35,6 @@ const LoginForm = () => {
         console.log('login error buddy')
       }, 5000)
     }
-    //dispatch(setUser(lname,fname,picUrl,email))
-    //console.log(fname,lname,picUrl,reduxEmail)
   }
 
   return(

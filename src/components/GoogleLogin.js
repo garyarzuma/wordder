@@ -3,8 +3,12 @@ import GoogleLogin from 'react-google-login'
 import React from 'react'
 import './styles/GoogleLogin.css'
 import googleIcon from '../images/google-icon.jpg'
+import { useDispatch } from 'react-redux'
+import { setUser } from '../reducers/userReducer'
 
 function GoogleLg() {
+
+  const dispatch = useDispatch()
 
   const handleLogin = async googleData => {
     const res = await fetch('api/login/v1/auth/google', {
@@ -19,6 +23,7 @@ function GoogleLg() {
     const data = await res.json()
     // store returned user somehow
     console.log(data)
+    dispatch(setUser(null,data.name,data.picURL,data.email))
   }
 
   return (

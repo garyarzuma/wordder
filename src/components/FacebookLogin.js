@@ -5,13 +5,17 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import {  faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useDispatch } from 'react-redux'
+import { setUser } from '../reducers/userReducer'
 
 function FbLogin() {
 
+  const dispatch = useDispatch()
   library.add(fas, faFacebook)
 
   const responseFacebook = (response) => {
-    console.log(response)
+    console.log(response, response.picture.data.url)
+    dispatch(setUser(null,response.name,response.picture.data.url,response.email))
   }
 
   return (

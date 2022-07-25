@@ -1,17 +1,40 @@
-.nav-container{
-    display:flex;
-    margin: auto;
-    width: 50%;
-    min-width: 300px;
-    justify-content: space-around;
+.float-left-container{
+    float:left;
 }
 
 .menu-container{
-    display: flex;
+    padding-top:2px;
     background: rgb(236, 236, 236);
     height: 40px;
     vertical-align: middle;
-    align-items: center;
+    
     margin-bottom: 30px;
     border-bottom: .5px solid rgb(146, 146, 146)
+}
+
+.float-right-container{
+    float:right;
+    
+}
+
+.link{
+    margin: 0px 10px 0 10px;
+}
+
+.pic{
+    float:right;
+    display: block;
+    max-width:37px;
+    max-height:37px;
+    width: auto;
+    height: auto;
+    object-fit:cover;
+    border-radius:50%;
+    margin-left:10px;
+    margin-right:10px;
+    
+}
+
+.name{
+    float:left;
 }
