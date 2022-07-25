@@ -7,15 +7,18 @@ import {  faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../reducers/userReducer'
+import { useNavigate } from 'react-router-dom'
 
 function FbLogin() {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   library.add(fas, faFacebook)
 
   const responseFacebook = (response) => {
     console.log(response, response.picture.data.url)
     dispatch(setUser(null,response.name,response.picture.data.url,response.email))
+    navigate('/', { replace: true })
   }
 
   return (

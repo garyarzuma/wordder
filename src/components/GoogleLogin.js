@@ -5,10 +5,12 @@ import './styles/GoogleLogin.css'
 import googleIcon from '../images/google-icon.jpg'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../reducers/userReducer'
+import { useNavigate } from 'react-router-dom'
 
 function GoogleLg() {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleLogin = async googleData => {
     const res = await fetch('api/login/v1/auth/google', {
@@ -24,6 +26,7 @@ function GoogleLg() {
     // store returned user somehow
     console.log(data)
     dispatch(setUser(null,data.name,data.picURL,data.email))
+    navigate('/', { replace: true })
   }
 
   return (

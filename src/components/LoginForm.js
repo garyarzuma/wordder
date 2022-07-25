@@ -3,10 +3,12 @@ import { useDispatch } from 'react-redux'
 import { setUser } from '../reducers/userReducer'
 import loginService from '../services/login'
 import './styles/LoginForm.css'
+import { useNavigate } from 'react-router-dom'
 
 const LoginForm = () => {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [password, setPassword] = useState()
   const [email, setEmail] = useState()
@@ -27,6 +29,7 @@ const LoginForm = () => {
 
       setEmail('')
       setPassword('')
+      navigate('/', { replace: true })
 
     } catch (exception){
       //setErrorMessage('Wrong Username or Password')
