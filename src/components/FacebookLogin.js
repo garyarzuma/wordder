@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../reducers/userReducer'
 import { useNavigate } from 'react-router-dom'
+import loginService from '../services/login'
 
 function FbLogin() {
 
@@ -15,8 +16,13 @@ function FbLogin() {
   const navigate = useNavigate()
   library.add(fas, faFacebook)
 
-  const responseFacebook = (response) => {
-    console.log(response, response.picture.data.url)
+  const responseFacebook = async (response) => {
+    const myRes = await loginService.facebookLogin({
+      name:response.name, email:response.email, picture:response.picture
+    })
+    console.log('Coming back from backend',myRes)
+    console.log(response)
+
     dispatch(setUser(null,response.name,response.picture.data.url,response.email))
     navigate('/', { replace: true })
   }
