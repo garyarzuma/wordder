@@ -5,6 +5,7 @@ import Menu from './components/Menu'
 import InvalidWords from './components/InvalidWords'
 import Login from './components/Login'
 import HowTo from './components/HowTo'
+import Stats from './components/Stats'
 
 import {
   Routes,
@@ -23,6 +24,7 @@ function App() {
         <Route path="/invalidwords" element={<InvalidWords />} />
         <Route path="/invalidwords/invalidwords" element={<InvalidWords />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/stats" element={<Stats />} />
       </Routes>
     </div>
   )
