@@ -10,7 +10,10 @@ const Stats = () => {
   return (
     <div className='stats-page'>
       {loggedIn &&
+      <div className='stats-container'>
         <div>{ user.fname }&apos;s Stats</div>
+        <div>Games Won: {user.gamesWon}</div>
+      </div>
       }
       {!loggedIn &&
         <div>Please login to see Game Statistics</div>
