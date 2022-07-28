@@ -5,16 +5,18 @@ import { useState, useEffect } from 'react'
 import statsService from '../services/stats'
 
 const Stats = () => {
+  //first get the users email from our redux state so we can see if logged in
   const user = useSelector(state => state.user)
   const loggedIn = user.email
 
   const [gamesWon, setgamesWon] = useState()
 
+  //fetches the number of games the user has won
   const getStats = async () => {
     const currentUser = await statsService.getStats(user)
     setgamesWon(currentUser.gamesWon)
   }
-
+  //updates the number of games won as soon as we click on stats
   useEffect(() => {
     getStats()
   }, [])

@@ -12,11 +12,13 @@ import { setToWord, setFromWord, setCorrectGuessesArray } from '../reducers/word
 import { useSelector, useDispatch } from 'react-redux'
 import { handleHotOrCold } from '../utils/utilityFunctions'
 import Rules from './Rules'
+import statsService from '../services/stats'
 
 let prevGuess = ''
 
 const Wordder =  () => {
 
+  const loggedIn = useSelector(state => state.user.email)
   const [minSteps, setMinSteps] = useState(null)
   const [hotOrColdSteps, setHotOrColdSteps] = useState(null)
   const [answerArray, setAnswerArray] = useState([])
@@ -109,6 +111,10 @@ const Wordder =  () => {
               setMessage(`Success! You found a Wordder in ${correctGuessesArray.length} steps! The minimum possible steps is ${minSteps}`)
             }
             setEndGameFreeze(true)
+            //update stats
+            if(loggedIn){
+              statsService.updateStats(loggedIn)
+            }
           }
           else{
             prevGuess = currentGuess
