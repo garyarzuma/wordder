@@ -111,9 +111,9 @@ const Wordder =  () => {
               setMessage(`Success! You found a Wordder in ${correctGuessesArray.length} steps! The minimum possible steps is ${minSteps}`)
             }
             setEndGameFreeze(true)
-            //update stats
+            //update stats if logged in and user.email is not null
             if(loggedIn){
-              statsService.updateStats(loggedIn)
+              statsService.updateStats({ email:loggedIn, newGuess:correctGuessesArray.length })
             }
           }
           else{
