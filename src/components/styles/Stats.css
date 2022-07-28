@@ -1,0 +1,17 @@
+.statNumber{
+    font-size: 3em;
+}
+
+.statDesc{
+
+}
+
+.stat-container{
+  width: 200px;
+}
+
+.stats-container{
+    margin:50px;
+    display:flex;
+    justify-content: center;
+}

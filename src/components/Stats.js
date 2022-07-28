@@ -41,10 +41,18 @@ const Stats = () => {
   return (
     <div className='stats-page'>
       {loggedIn &&
-      <div className='stats-container'>
+      <div>
         <h1>{ user.fname }&apos;s Stats</h1>
-        <div>Games Won: {gamesWon}</div>
-        <div>Average Guesses: {averageGuesses}</div>
+        <div className='stats-container'>
+          <div className='stat-container'>
+            <div className='statNumber'>{gamesWon}</div>
+            <div className='statDesc'>Games Won</div>
+          </div>
+          <div className='stat-container'>
+            <div className='statNumber'>{averageGuesses}</div>
+            <div className='statDesc'>Average Guesses</div>
+          </div>
+        </div>
       </div>
       }
       {!loggedIn &&
