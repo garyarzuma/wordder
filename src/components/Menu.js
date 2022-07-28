@@ -7,6 +7,7 @@ import {
 import defaultPicIcon from '../images/default-profile-pic.PNG'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../reducers/userReducer'
+import wordderLogo from '../images/wordder-logo.jpg'
 
 const Menu = () => {
   const dispatch = useDispatch()
@@ -27,6 +28,9 @@ const Menu = () => {
   return (
     <div className="menu-container">
       <div className="float-left-container">
+        <div>
+          <img className='logo' src={wordderLogo} alt="wordder-logo" />
+        </div>
         <Link className="link" to={`/${fromWord}/${toWord}`}>Home</Link>
         <Link className="link" to='/stats'>Statistics</Link>
       </div>
