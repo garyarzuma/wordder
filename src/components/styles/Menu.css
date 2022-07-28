@@ -21,6 +21,7 @@
 
 .float-right-container{
     float:right;
+    display: flex;
 }
 
 .link{
@@ -60,6 +61,12 @@
 .logged-in-right-container{
     display:flex;
 }
+
+.not-logged-in-right-container{
+    display:flex;
+    height: 40px;
+}
+
 
 .drop-down-container{
     position: absolute;
