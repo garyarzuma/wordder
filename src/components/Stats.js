@@ -17,8 +17,7 @@ const Stats = () => {
       (p,c) => p+c,
       0
     )
-    console.log(total,array.length)
-    return total/array.length
+    return Math.round(10*total/array.length)/10 //round to 1 decimal place
   }
 
   //fetches the number of games the user has won
@@ -50,7 +49,7 @@ const Stats = () => {
           </div>
           <div className='stat-container'>
             <div className='statNumber'>{averageGuesses}</div>
-            <div className='statDesc'>Average Guesses</div>
+            <div className='statDesc'>Average Steps</div>
           </div>
         </div>
       </div>

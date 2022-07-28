@@ -176,24 +176,23 @@ const Wordder =  () => {
       <h1>Welcome to Wordder!</h1>
       <Rules />
       <div className="start-target-minSteps-current-container">
-        <div className="start-target-container">
-          <div>Starting Word: {fromWord}</div>
-          <div>Target Word:  {toWord}</div>
-        </div>
-        <div className="minSteps-currentSteps-container">
-          <div>Minimum Steps: {minSteps}</div>
-          <div>Current Minimum Steps: {hotOrColdSteps}</div>
-        </div>
+        <div>Minimum Steps: {minSteps}</div>
+        <div>Current Minimum Steps: {hotOrColdSteps}</div>
       </div>
       <Notification message={message}/>
       <div className = "guessArray">
         {correctGuessesArray.map( (guess) => {
           return(
-            <div key={Math.floor(Math.random()*(1000000))}>{guess}</div>
+            <div key={Math.floor(Math.random()*(1000000))}>{guess.toUpperCase()}</div>
           )
         })}
       </div>
       <Guessboxes setCurrentGuess={setCurrentGuess} handleGuess={handleGuess}/>
+
+      <div className="start-target-container">
+        <div>{toWord.toUpperCase()}</div>
+      </div>
+
       <br/>
       <button onClick={handleUndoClick}>Undo</button>
       <button onClick={handleNewGameClick}>New Game</button>
