@@ -36,7 +36,7 @@ const Menu = () => {
             <div className='name'>Welcome, {fname}</div>
             {picURL &&
             <div>
-              <img className='pic' src={picURL} alt="profile-pic" onClick={() => setDropDown(!dropDown)} />
+              <img className='pic' src={picURL} alt="profile-pic" referrerPolicy="no-referrer" onClick={() => setDropDown(!dropDown)} />
             </div>
             }
             {!picURL &&
