@@ -1,12 +1,6 @@
 .App {
   text-align: center;
   font-size: 1.5em;
-  font-family: myFirstFont, Arial, Helvetica, sans-serif;
-}
-
-@font-face {
-  font-family: myFirstFont;
-  src: url(fonts/Dosis-SemiBold.ttf);
 }
 
 .App-logo {
