@@ -113,7 +113,7 @@ const Wordder =  () => {
             setEndGameFreeze(true)
             //update stats if logged in and user.email is not null
             if(loggedIn){
-              statsService.updateStats({ email:loggedIn, newGuess:correctGuessesArray.length })
+              statsService.updateStats({ email:loggedIn, newGuess:correctGuessesArray.length, idealGuess:minSteps })
             }
           }
           else{

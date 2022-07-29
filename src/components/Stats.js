@@ -11,6 +11,8 @@ const Stats = () => {
 
   const [gamesWon, setgamesWon] = useState(0)
   const [averageGuesses, setAverageGuesses] = useState(0)
+  const [averageIdealGuesses, setAverageIdealGuesses] = useState(0)
+  const [skillRate, setSkillRate] = useState(100)
 
   const findAverage = (array) => {
     const total = array.reduce(
@@ -23,11 +25,13 @@ const Stats = () => {
   //fetches the number of games the user has won
   const getStats = async () => {
     const currentUser = await statsService.getStats(user)
-    console.log(currentUser)
     setgamesWon(currentUser.gamesWon)
-    console.log(currentUser.guessesArray)
-    if ( currentUser.guessesArray.length > 0 ) {  //only runs the calculation if they have played
-      setAverageGuesses(findAverage(currentUser.guessesArray))
+    if ( currentUser.guessesArray.length > 0 && currentUser.idealGuessesArray.length > 0 ) {  //only runs the calculation if they have played
+      const average = findAverage(currentUser.guessesArray)
+      const idealAverage = findAverage(currentUser.idealGuessesArray)
+      setAverageGuesses(average)
+      setAverageIdealGuesses(idealAverage)
+      setSkillRate(Math.round(idealAverage/average*100))
     }
   }
   //updates the number of games won as soon as we click on stats
@@ -50,6 +54,14 @@ const Stats = () => {
           <div className='stat-container'>
             <div className='statNumber'>{averageGuesses}</div>
             <div className='statDesc'>Average Steps</div>
+          </div>
+          <div className='stat-container'>
+            <div className='statNumber'>{averageIdealGuesses}</div>
+            <div className='statDesc'>Average Minimum Steps</div>
+          </div>
+          <div className='stat-container'>
+            <div className='statNumber'>{skillRate}%</div>
+            <div className='statDesc'>Skill Rate</div>
           </div>
         </div>
       </div>
