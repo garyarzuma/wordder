@@ -53,7 +53,7 @@ const Stats = () => {
           </div>
           <div className='stat-container'>
             <div className='statNumber'>{averageGuesses}</div>
-            <div className='statDesc'>Average Steps</div>
+            <div className='statDesc'>Your Average Steps</div>
           </div>
           <div className='stat-container'>
             <div className='statNumber'>{averageIdealGuesses}</div>
