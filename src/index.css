@@ -16,9 +16,10 @@ code {
 
 #footer {
   font-size: 1.2em;
-  position:absolute;
+  position:fixed;
   bottom: 13px;
-  width: 100%
+  width: 100%;
+  min-width: 300px;
 }
 
 #footer span {
@@ -27,8 +28,9 @@ code {
 
 .relative-container{
   display:flex;
-  justify-content: center;
+  justify-content: right;
   align-items: center;
+  margin-right:13px;
 }
 
 @font-face {

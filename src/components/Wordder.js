@@ -164,10 +164,11 @@ const Wordder =  () => {
     setMessage(null)
     setEndGameFreeze(false)
     if(correctGuessesArray.length > 1){
-      dispatch(setCorrectGuessesArray(correctGuessesArray.slice(0,-1)))
-      prevGuess = correctGuessesArray[correctGuessesArray.length-2]
+      const newArray = correctGuessesArray.slice(0,-1)
+      dispatch(setCorrectGuessesArray(newArray))
+      prevGuess = newArray.slice(-1)
       setCurrentGuess('')
-      setHotOrColdSteps(traverseGraph(prevGuess,toWord,correctGuessesArray)[0])
+      setHotOrColdSteps(traverseGraph(prevGuess,toWord,newArray)[0])
     }
   }
 
