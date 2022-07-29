@@ -176,8 +176,14 @@ const Wordder =  () => {
       <h1>Welcome to Wordder!</h1>
       <Rules />
       <div className="start-target-minSteps-current-container">
-        <div>Minimum Steps: {minSteps}</div>
-        <div>Current Minimum Steps: {hotOrColdSteps}</div>
+        <div>
+          <div className = 'steps-display' >{minSteps}</div>
+          <div>Minimum Steps</div>
+        </div>
+        <div>
+          <div className = 'steps-display'>{hotOrColdSteps}</div>
+          <div>Steps to Go</div>
+        </div>
       </div>
       <Notification message={message}/>
       <div className = "guessArray">
