@@ -174,7 +174,7 @@ const Wordder =  () => {
 
   return (
     <div className="Home">
-      <h1>Welcome to Wordder!</h1>
+      <h1 className='wordder-heading'>Wordder!</h1>
       <Rules />
       <div className="start-target-minSteps-current-container">
         <div>

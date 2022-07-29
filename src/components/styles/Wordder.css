@@ -19,3 +19,15 @@ button:hover{
 .Home{
     min-width: 600px;
 }
+
+
+@font-face {
+    font-family: wordderLogoFont;
+    src: url(../../fonts/EveryRunRegular-ZV5pK.ttf);
+}
+
+.wordder-heading{
+    font-family: wordderLogoFont;
+    font-size:3em;
+    margin:20px;
+}
