@@ -4,6 +4,7 @@ import { setUser } from '../reducers/userReducer'
 import loginService from '../services/login'
 import './styles/LoginForm.css'
 import { useNavigate } from 'react-router-dom'
+import Notification from './Notification'
 
 const LoginForm = () => {
 
@@ -12,6 +13,7 @@ const LoginForm = () => {
 
   const [password, setPassword] = useState()
   const [email, setEmail] = useState()
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -32,38 +34,41 @@ const LoginForm = () => {
       navigate('/', { replace: true })
 
     } catch (exception){
-      //setErrorMessage('Wrong Username or Password')
+      setErrorMessage('Wrong Username or Password')
       setTimeout(() => {
-        //setErrorMessage(null)
+        setErrorMessage(null)
         console.log('login error buddy')
-      }, 5000)
+      }, 3000)
     }
   }
 
   return(
-    <form onSubmit={handleLogin}>
-      <div>
-        <input
-          id='email'
-          type="text"
-          value={email}
-          name="Email"
-          onChange={({ target }) => setEmail(target.value)}
-          placeholder="Email"
-        />
-      </div>
-      <div>
-        <input
-          id='password'
-          type="password"
-          value={password}
-          name="Password"
-          onChange={({ target }) => setPassword(target.value)}
-          placeholder="Password"
-        />
-      </div>
-      <button id='login-button' type="submit">login</button>
-    </form>
+    <div>
+      <Notification message={errorMessage}/>
+      <form onSubmit={handleLogin}>
+        <div>
+          <input
+            id='email'
+            type="text"
+            value={email}
+            name="Email"
+            onChange={({ target }) => setEmail(target.value)}
+            placeholder="Email"
+          />
+        </div>
+        <div>
+          <input
+            id='password'
+            type="password"
+            value={password}
+            name="Password"
+            onChange={({ target }) => setPassword(target.value)}
+            placeholder="Password"
+          />
+        </div>
+        <button id='login-button' type="submit">login</button>
+      </form>
+    </div>
   )
 }
 

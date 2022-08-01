@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './styles/CreateUserForm.css'
 import loginService from '../services/login'
+import Notification from './Notification'
 
 const CreateUserForm = ({ setShowCreateForm }) => {
 
@@ -31,11 +32,11 @@ const CreateUserForm = ({ setShowCreateForm }) => {
       setFname('')
       setLname('')
     } catch (exception){
-      setErrorMessage('Error')
+      setErrorMessage('Error Backend')
       console.log('login error buddy' + exception)
       setTimeout(() => {
         setErrorMessage(null)
-      }, 5000)
+      }, 3000)
     }
   }
 
@@ -46,7 +47,7 @@ const CreateUserForm = ({ setShowCreateForm }) => {
   return(
     <form className="create-user-form-box">
       <div className="header">Create New Account</div>
-      <div className="errorMessageSigningUp">{errorMessage}</div>
+      <Notification message={errorMessage} />
       <div>
         <input
           className='input-box'

@@ -7,19 +7,19 @@ const Notification = ({ message }) => {
     return null
   }
   if(message.indexOf('Success') !== -1) {
-    myClass = 'goodMessage'
+    myClass = 'green'
   }
   else if(message.indexOf('Cold') !== -1){
-    myClass = 'coldMessage'
+    myClass = 'rgb(0, 140, 255)'
   }
   else if(message.indexOf('Hot')!== -1){
-    myClass = 'hotterMessage'
+    myClass = 'rgb(255, 81, 0)'
   }
   else{
-    myClass = 'error'
+    myClass = 'red'
   }
   return (
-    <div className={myClass}>
+    <div className='notification' style={{ color:myClass }}>
       {message}
     </div>
   )

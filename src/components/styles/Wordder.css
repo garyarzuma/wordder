@@ -9,7 +9,8 @@ button:hover{
     margin: auto;
     width: 50%;
     min-width: 300px;
-    justify-content: space-around
+    justify-content: space-around;
+    margin-bottom:10px;
 }
 
 .steps-display{
