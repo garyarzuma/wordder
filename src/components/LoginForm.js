@@ -34,6 +34,7 @@ const LoginForm = () => {
       navigate('/', { replace: true })
 
     } catch (exception){
+      console.log(exception)
       setErrorMessage('Wrong Username or Password')
       setTimeout(() => {
         setErrorMessage(null)

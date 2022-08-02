@@ -33,7 +33,7 @@ const CreateUserForm = ({ setShowCreateForm }) => {
       setLname('')
     } catch (exception){
       setErrorMessage('Error Backend')
-      console.log('login error buddy' + exception)
+      console.log('Login Error: ' + exception.response.data.error)
       setTimeout(() => {
         setErrorMessage(null)
       }, 3000)
