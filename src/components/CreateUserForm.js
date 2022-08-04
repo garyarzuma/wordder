@@ -5,38 +5,51 @@ import Notification from './Notification'
 
 const CreateUserForm = ({ setShowCreateForm }) => {
 
-  const [password, setPassword] = useState()
-  const [passwordConfirmation, setPasswordConfirmation] = useState()
-  const [email, setEmail] = useState()
-  const [fname, setFname] = useState()
-  const [lname, setLname] = useState()
+  const [password, setPassword] = useState('')
+  const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const [email, setEmail] = useState('')
+  const [fname, setFname] = useState('')
+  const [lname, setLname] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
 
-
+  //First we check for password errors which must be on the frontend, then get backend error messages
+  //from the backend
   const handleCreate = async (event) => {
     event.preventDefault()
-    try {
-      const user = await loginService.signup({
-        email, password, fname, lname
-      })
-      setShowCreateForm(false)
-      window.localStorage.setItem(
-        'loggedUser', JSON.stringify(user)
-      )
-      //blogService.setToken(user.token)
-      console.log(user)
-      //dispatch(setUser(lname,fname,picUrl,password,email))
-      setEmail('')
-      setPassword('')
-      setPasswordConfirmation('')
-      setFname('')
-      setLname('')
-    } catch (exception){
-      setErrorMessage('Error Backend')
-      console.log('Login Error: ' + exception.response.data.error)
+    if (password !== passwordConfirmation){
+      setErrorMessage('Passwords Must Match')
       setTimeout(() => {
         setErrorMessage(null)
-      }, 3000)
+      }, 5000)
+    }
+    else if (password.length < 8) {
+      setErrorMessage('Password must be at least 8 characters long')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
+    else{
+      try {
+        const user = await loginService.signup({
+          email, password, fname, lname
+        })
+        setShowCreateForm(false)
+        window.localStorage.setItem(
+          'loggedUser', JSON.stringify(user)
+        )
+        //blogService.setToken(user.token)
+        console.log(user)
+        setEmail('')
+        setPassword('')
+        setPasswordConfirmation('')
+        setFname('')
+        setLname('')
+      } catch (exception){
+        setErrorMessage(exception.response.data.error)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+      }
     }
   }
 
