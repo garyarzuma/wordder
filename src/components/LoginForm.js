@@ -26,7 +26,6 @@ const LoginForm = () => {
         'loggedUser', JSON.stringify(user)
       )
       statsService.setToken(user.token)
-      console.log(user)
 
       dispatch(setUser(user.user.lname,user.user.fname,null,user.user.email))
 

@@ -52,7 +52,7 @@ const Wordder =  () => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       dispatch(setUser(user.user.lname,user.user.fname,user.user.picURL,user.user.email))
-      //noteService.setToken(user.token)
+      statsService.setToken(user.token)
     }
   }, [])
 
@@ -92,7 +92,7 @@ const Wordder =  () => {
     setShowSolution(!showSolution)
   }
 
-  const handleGuess = () => {
+  const handleGuess = async () => {
     let goodGuess = true
     console.log('correctGuessesArray in handleGuyess function: ',correctGuessesArray)
     correctGuessesArray.forEach(word => {
@@ -124,7 +124,12 @@ const Wordder =  () => {
             setEndGameFreeze(true)
             //update stats if logged in and user.email is not null
             if(loggedIn){
-              statsService.updateStats({ email:loggedIn, newGuess:correctGuessesArray.length, idealGuess:minSteps })
+              try {
+                await statsService.updateStats({ email:loggedIn, newGuess:correctGuessesArray.length, idealGuess:minSteps })
+              } catch (exception) {
+                console.log('TOKEN EXPIRED')
+                setMessage(exception.response.data.error)
+              }
             }
           }
           else{
