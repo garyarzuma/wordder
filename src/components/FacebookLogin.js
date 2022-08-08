@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux'
 import { setUser } from '../reducers/userReducer'
 import { useNavigate } from 'react-router-dom'
 import loginService from '../services/login'
+import statsService from '../services/stats'
 
 function FbLogin() {
 
@@ -23,8 +24,7 @@ function FbLogin() {
     window.localStorage.setItem(
       'loggedUser', JSON.stringify(user)
     )
-    //blogService.setToken(user.token)
-    console.log('Coming back from backend', user.user.picURL)
+    statsService.setToken(user.token)
 
     dispatch(setUser(null,user.user.name, user.user.picURL,user.user.email))
     navigate('/', { replace: true })

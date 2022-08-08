@@ -49,7 +49,6 @@ const Wordder =  () => {
   //Checks to see localStorage if you have signed in recently
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedUser')
-    console.log(loggedUserJSON)
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       dispatch(setUser(user.user.lname,user.user.fname,user.user.picURL,user.user.email))

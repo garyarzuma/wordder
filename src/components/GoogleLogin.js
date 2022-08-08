@@ -6,6 +6,7 @@ import googleIcon from '../images/google-icon.jpg'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../reducers/userReducer'
 import { useNavigate } from 'react-router-dom'
+import statsService from '../services/stats'
 
 function GoogleLg() {
 
@@ -28,7 +29,7 @@ function GoogleLg() {
     window.localStorage.setItem(
       'loggedUser', JSON.stringify(user)
     )
-    //blogService.setToken(user.token)
+    statsService.setToken(user.token)
 
     dispatch(setUser(null,user.user.name,user.user.picURL,user.user.email))
     navigate('/', { replace: true })

@@ -1,8 +1,17 @@
 import axios from 'axios'
 const baseUrl = '/api/stats'
 
+let token = null
+
+const setToken = newToken => {
+  token = `bearer ${newToken}`
+}
+
 const updateStats = async credentials => {
-  const response = await axios.post(baseUrl+'/updateStats', credentials)
+  const config = {
+    headers: { Authorization: token },
+  }
+  const response = await axios.post(baseUrl+'/updateStats', credentials, config)
   return response.data
 }
 
@@ -11,4 +20,4 @@ const getStats = async credentials => {
   return response.data
 }
 
-export default { updateStats, getStats }
+export default { updateStats, getStats, setToken }

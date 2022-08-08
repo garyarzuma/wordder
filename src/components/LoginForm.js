@@ -5,6 +5,7 @@ import loginService from '../services/login'
 import './styles/LoginForm.css'
 import { useNavigate } from 'react-router-dom'
 import Notification from './Notification'
+import statsService from '../services/stats'
 
 const LoginForm = () => {
 
@@ -24,7 +25,7 @@ const LoginForm = () => {
       window.localStorage.setItem(
         'loggedUser', JSON.stringify(user)
       )
-      //blogService.setToken(user.token)
+      statsService.setToken(user.token)
       console.log(user)
 
       dispatch(setUser(user.user.lname,user.user.fname,null,user.user.email))
