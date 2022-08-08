@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { handleHotOrCold } from '../utils/utilityFunctions'
 import Rules from './Rules'
 import statsService from '../services/stats'
+import { setUser } from '../reducers/userReducer'
 
 let prevGuess = ''
 
@@ -44,6 +45,17 @@ const Wordder =  () => {
       handleNewGameClick()
     }
   },[fromCustWord])
+
+  //Checks to see localStorage if you have signed in recently
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedUser')
+    console.log(loggedUserJSON)
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      dispatch(setUser(user.user.lname,user.user.fname,user.user.picURL,user.user.email))
+      //noteService.setToken(user.token)
+    }
+  }, [])
 
   useEffect(() => {
     if(firstTime){

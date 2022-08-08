@@ -17,13 +17,16 @@ function FbLogin() {
   library.add(fas, faFacebook)
 
   const responseFacebook = async (response) => {
-    const myRes = await loginService.facebookLogin({
+    const user = await loginService.facebookLogin({
       name:response.name, email:response.email, picture:response.picture
     })
-    console.log('Coming back from backend',myRes)
-    console.log(response)
+    window.localStorage.setItem(
+      'loggedUser', JSON.stringify(user)
+    )
+    //blogService.setToken(user.token)
+    console.log('Coming back from backend', user.user.picURL)
 
-    dispatch(setUser(null,response.name,response.picture.data.url,response.email))
+    dispatch(setUser(null,user.user.name, user.user.picURL,user.user.email))
     navigate('/', { replace: true })
   }
 

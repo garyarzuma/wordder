@@ -22,10 +22,15 @@ function GoogleLg() {
         'Content-Type': 'application/json'
       }
     })
-    const data = await res.json()
-    // store returned user somehow
-    console.log(data)
-    dispatch(setUser(null,data.name,data.picURL,data.email))
+
+    const user = await res.json()
+
+    window.localStorage.setItem(
+      'loggedUser', JSON.stringify(user)
+    )
+    //blogService.setToken(user.token)
+
+    dispatch(setUser(null,user.user.name,user.user.picURL,user.user.email))
     navigate('/', { replace: true })
   }
 
