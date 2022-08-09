@@ -14,6 +14,7 @@ function GoogleLg() {
   const navigate = useNavigate()
 
   const handleLogin = async googleData => {
+    console.log(googleData)
     const res = await fetch('api/login/v1/auth/google', {
       method: 'POST',
       body: JSON.stringify({
