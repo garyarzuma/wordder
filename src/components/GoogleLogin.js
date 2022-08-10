@@ -24,7 +24,7 @@ function GoogleLg() {
         name:user.name }
       )
       window.localStorage.setItem(
-        'loggedUser', JSON.stringify(user)
+        'loggedUser', JSON.stringify(savedUser)
       )
       statsService.setToken(savedUser.token)
       dispatch(setUser(savedUser.user.lname,savedUser.user.fname, savedUser.user.picURL,savedUser.user.email))

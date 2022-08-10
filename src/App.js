@@ -22,9 +22,13 @@ function App() {
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedUser')
     if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      dispatch(setUser(user.user.lname,user.user.fname,user.user.picURL,user.user.email))
-      statsService.setToken(user.token)
+      try{
+        const user = JSON.parse(loggedUserJSON)
+        dispatch(setUser(user.user.lname,user.user.fname,user.user.picURL,user.user.email))
+        statsService.setToken(user.token)
+      } catch(error){
+        console.log(error)
+      }
     }
   }, [])
 
