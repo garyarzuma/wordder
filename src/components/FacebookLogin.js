@@ -37,6 +37,7 @@ function FbLogin() {
       fields="name,email,picture"
       scope="public_profile,user_friends,email"
       callback={responseFacebook}
+      isMobile = {  false }
       render={renderProps => (
         <div className='facebook-button-container'>
           <FontAwesomeIcon icon="fa-brands fa-facebook" className="facebook-icon" inverse />
