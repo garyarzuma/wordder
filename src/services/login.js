@@ -16,4 +16,9 @@ const facebookLogin = async credentials => {
   return response.data
 }
 
-export default { login,signup, facebookLogin }
+const googleLogin = async credentials => {
+  const response = await axios.post(baseUrl+'/googleLogin', credentials)
+  return response.data
+}
+
+export default { login,signup, facebookLogin, googleLogin }
