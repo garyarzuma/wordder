@@ -1,20 +1,37 @@
-//import GoogleLogin from 'react-google-login'
-//import GoogleButton from 'react-google-button'
 import React, { useEffect } from 'react'
 import './styles/GoogleLogin.css'
 import jwt_decode from 'jwt-decode'
-//import googleIcon from '../images/google-icon.jpg'
-//import { useDispatch } from 'react-redux'
-//import { setUser } from '../reducers/userReducer'
-//import { useNavigate } from 'react-router-dom'
-//import statsService from '../services/stats'
+import loginService from '../services/login'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { setUser } from '../reducers/userReducer'
+
+import statsService from '../services/stats'
 
 function GoogleLg() {
 
-  const handleCallbackResponse = (response) => {
-    console.log('Encoded JWT ID Token: ' + response.credential)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleCallbackResponse = async (response) => {
     const user = jwt_decode(response.credential)
-    console.log(user)
+    try {
+      const savedUser = await loginService.googleLogin({
+        email:user.email,
+        family_name:user.family_name,
+        given_name:user.given_name,
+        picture:user.picture,
+        name:user.name }
+      )
+      window.localStorage.setItem(
+        'loggedUser', JSON.stringify(user)
+      )
+      statsService.setToken(savedUser.token)
+      dispatch(setUser(savedUser.user.lname,savedUser.user.fname, savedUser.user.picURL,savedUser.user.email))
+      navigate('/', { replace: true })
+    } catch (error){
+      console.log('Error Signing into Google with error ',error)
+    }
   }
 
   useEffect(() => {
@@ -24,52 +41,14 @@ function GoogleLg() {
       callback: handleCallbackResponse
     })
     google.accounts.id.renderButton(
-      document.getElementById('signInDiv'),
-      { theme: 'outline', size: 'large' }
+      document.getElementById('google-sign-in-button'),
+      { theme: 'outline', size: 'large', width: '250px' }
     )
   }, [])
 
-  /*  const dispatch = useDispatch()
-  const navigate = useNavigate()
- */
-  /*  const handleLogin = async googleData => {
-    console.log(googleData)
-    const res = await fetch('api/login/v1/auth/google', {
-      method: 'POST',
-      body: JSON.stringify({
-        token: googleData.tokenId
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-
-    const user = await res.json()
-
-    window.localStorage.setItem(
-      'loggedUser', JSON.stringify(user)
-    )
-    statsService.setToken(user.token)
-
-    dispatch(setUser(null,user.user.name,user.user.picURL,user.user.email))
-    navigate('/', { replace: true })
-  } */
-
   return (
     <div>
-      <div id='signInDiv'></div>
-      {/* <GoogleLogin
-        clientId= {process.env.REACT_APP_GOOGLE_CLIENT_ID}
-        render={renderProps => (
-          <div className='google-button-container'>
-            <img className='google-icon' src={googleIcon}></img>
-            <button className='google-sign-in-button' onClick={renderProps.onClick} disabled={renderProps.disabled}>Sign in with Google</button>
-          </div>
-        )}
-        onSuccess={handleLogin}
-        onFailure={handleLogin}
-        cookiePolicy={'single_host_origin'}
-      /> */}
+      <div id='google-sign-in-button'></div>
     </div>
   )
 }
