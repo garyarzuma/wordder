@@ -9,6 +9,7 @@ import Stats from './components/Stats'
 import { setUser } from './reducers/userReducer'
 import { useDispatch } from 'react-redux'
 import statsService from './services/stats'
+import Footer from './components/Footer'
 
 import {
   Routes,
@@ -34,16 +35,19 @@ function App() {
 
   return (
     <div className="App">
-      <Menu />
-      <Routes>
-        <Route path="/howtoplay" element={<HowTo/>} />
-        <Route path="/:fromCustWord/:toCustWord"  element={<Wordder/>} />
-        <Route path="/" element={<Wordder/>} />
-        <Route path="/invalidwords" element={<InvalidWords />} />
-        <Route path="/invalidwords/invalidwords" element={<InvalidWords />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/stats" element={<Stats />} />
-      </Routes>
+      <div>
+        <Menu />
+        <Routes>
+          <Route path="/howtoplay" element={<HowTo/>} />
+          <Route path="/:fromCustWord/:toCustWord"  element={<Wordder/>} />
+          <Route path="/" element={<Wordder/>} />
+          <Route path="/invalidwords" element={<InvalidWords />} />
+          <Route path="/invalidwords/invalidwords" element={<InvalidWords />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/stats" element={<Stats />} />
+        </Routes>
+      </div>
+      <Footer />
     </div>
   )
 }

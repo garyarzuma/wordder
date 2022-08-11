@@ -1,0 +1,16 @@
+.footer {
+    width: 100%
+  }
+  
+.footer span {
+    margin-right: 10px;
+  }
+  
+.footer-container{
+  display:flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: baseline;
+  margin-right:10px;
+  margin-bottom:10px;
+}
