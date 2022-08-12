@@ -1,0 +1,40 @@
+.footer {
+    width: 100%
+  }
+  
+.footer span {
+    margin-right: 10px;
+  }
+  
+.footer-container{
+  display:flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: baseline;
+  margin-right:10px;
+  margin-bottom:10px;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 600px) {
+    .footer-container{
+        font-size: 0.7em;
+    } 
+}
+
+@media screen and (max-width: 400px) {
+    .footer-container{
+        font-size: 0.5em;
+    } 
+}
+
+.github-square:hover{
+    cursor:pointer;
+}
+
+.footer-element{
+    font-style: none;
+    text-decoration: none;
+    color: rgb(17, 28, 128);
+    margin-right:10px;
+}

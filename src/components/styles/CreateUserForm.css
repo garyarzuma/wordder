@@ -1,6 +1,7 @@
 .create-user-form-box{
   position: relative;
-  width: 400px;
+  width: 30%;
+  min-width: 300px;
   margin: 0 auto;
   height: auto;
   max-height: 70vh;
@@ -26,7 +27,7 @@
 }
 
 .input-box{
-  width: 350px;
+  width: 100%;
 }
 
 input:focus{

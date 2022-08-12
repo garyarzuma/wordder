@@ -9,6 +9,36 @@
 
 .stats-container{
     margin:50px;
+    margin-left:10px;
+    margin-right:10px;
     display:flex;
     justify-content: center;
+}
+
+@media screen and (max-width: 600px) {
+  .stat-container{
+      width:90px;
+      margin-left:5px;
+      margin-right:5px;
+  } 
+  .statNumber{
+    font-size:2em;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .stat-container{
+      width:60px;
+      margin-left:2px;
+      margin-right:2px;
+  } 
+  .statNumber{
+    font-size:1.5em;
+  }
+  .statDesc{
+    font-size:.7em;
+  }
+  h1{
+    font-size:30px;
+  }
 }
