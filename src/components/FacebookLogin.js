@@ -35,7 +35,7 @@ function FbLogin() {
       appId={process.env.REACT_APP_FACEBOOK_CLIENT_ID}
       autoLoad={false}
       fields="name,email,picture"
-      scope="public_profile,user_friends,email"
+      scope="public_profile,email"
       callback={responseFacebook}
       isMobile = {  false }
       render={renderProps => (
