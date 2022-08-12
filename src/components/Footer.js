@@ -1,5 +1,7 @@
 import './styles/Footer.css'
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGithubSquare } from '@fortawesome/free-brands-svg-icons'
 
 const Footer = () => {
   return(
@@ -8,6 +10,7 @@ const Footer = () => {
         <a className = "footer-element" href="https://github.com/garyarzuma">
             Developed by Gary Arzumanyan
         </a>
+        <FontAwesomeIcon className='github-square'icon={faGithubSquare} size="xl" />
       </div>
     </div>
   )
