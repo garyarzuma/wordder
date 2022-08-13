@@ -11,6 +11,18 @@ const CreateUserForm = ({ setShowCreateForm }) => {
   const [fname, setFname] = useState('')
   const [lname, setLname] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
+  const [myTimeOut, setmyTimeOut] = useState(null)
+
+  const setNewTimeout = () => {
+    if (myTimeOut) {
+      console.log('Clearing timeout: ', myTimeOut)
+      clearTimeout(myTimeOut)
+    }
+    setmyTimeOut(setTimeout(() => {
+      setErrorMessage(null)
+    }, 5000))
+    console.log('Setting timeout: ', myTimeOut)
+  }
 
   //First we check for password errors which must be on the frontend, then get backend error messages
   //from the backend
@@ -18,15 +30,9 @@ const CreateUserForm = ({ setShowCreateForm }) => {
     event.preventDefault()
     if (password !== passwordConfirmation){
       setErrorMessage('Passwords Must Match')
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
     }
     else if (password.length < 8) {
       setErrorMessage('Password must be at least 8 characters long')
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
     }
     else{
       try {
@@ -46,11 +52,9 @@ const CreateUserForm = ({ setShowCreateForm }) => {
         setLname('')
       } catch (exception){
         setErrorMessage(exception.response.data.error)
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 5000)
       }
     }
+    setNewTimeout()
   }
 
   const handleCancel = async () => {
