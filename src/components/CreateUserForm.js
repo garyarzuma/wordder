@@ -11,40 +11,26 @@ const CreateUserForm = ({ setShowCreateForm }) => {
   const [fname, setFname] = useState('')
   const [lname, setLname] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
-  const [myTimeOut, setmyTimeOut] = useState(null)
-
-  const setNewTimeout = () => {
-    if (myTimeOut) {
-      console.log('Clearing timeout: ', myTimeOut)
-      clearTimeout(myTimeOut)
-    }
-    setmyTimeOut(setTimeout(() => {
-      setErrorMessage(null)
-    }, 5000))
-    console.log('Setting timeout: ', myTimeOut)
-  }
 
   //First we check for password errors which must be on the frontend, then get backend error messages
   //from the backend
   const handleCreate = async (event) => {
     event.preventDefault()
+    updateBorderErrorColors('default')
     if (password !== passwordConfirmation){
       setErrorMessage('Passwords Must Match')
+      updateBorderErrorColors('Password')
     }
     else if (password.length < 8) {
       setErrorMessage('Password must be at least 8 characters long')
+      updateBorderErrorColors('Password')
     }
     else{
       try {
-        const user = await loginService.signup({
+        await loginService.signup({
           email, password, fname, lname
         })
         setShowCreateForm(false)
-        window.localStorage.setItem(
-          'loggedUser', JSON.stringify(user)
-        )
-        //blogService.setToken(user.token)
-        console.log(user)
         setEmail('')
         setPassword('')
         setPasswordConfirmation('')
@@ -52,13 +38,36 @@ const CreateUserForm = ({ setShowCreateForm }) => {
         setLname('')
       } catch (exception){
         setErrorMessage(exception.response.data.error)
+        updateBorderErrorColors(exception.response.data.error)
       }
     }
-    setNewTimeout()
   }
 
   const handleCancel = async () => {
     setShowCreateForm(false)
+    updateBorderErrorColors('default')
+  }
+
+  const updateBorderErrorColors = (errorMessage) => {
+    if(errorMessage === 'default'){
+      const elements = document.querySelectorAll('.error-border')
+      console.log(elements)
+      if(elements){
+        elements.forEach(element => {
+          element.className = 'input-box'
+        })
+      }
+    }
+    if (errorMessage.indexOf('Email') !== -1){
+      document.getElementById('create-email').className = 'error-border'
+    }
+    else if (errorMessage.indexOf('Password') !== -1) {
+      document.getElementById('create-password').className = 'error-border'
+      document.getElementById('create-passwordC').className = 'error-border'
+    }
+    else if (errorMessage.indexOf('First') !== -1) {
+      document.getElementById('fname').className = 'error-border'
+    }
   }
 
   return(
@@ -68,7 +77,7 @@ const CreateUserForm = ({ setShowCreateForm }) => {
       <div>
         <input
           className='input-box'
-          id='email'
+          id='create-email'
           type="text"
           value={email}
           name="Email"
@@ -79,7 +88,7 @@ const CreateUserForm = ({ setShowCreateForm }) => {
       <div>
         <input
           className='input-box'
-          id='password'
+          id='create-password'
           type="password"
           value={password}
           name="Password"
@@ -90,7 +99,7 @@ const CreateUserForm = ({ setShowCreateForm }) => {
       <div>
         <input
           className='input-box'
-          id='passwordC'
+          id='create-passwordC'
           type="password"
           value={passwordConfirmation}
           name="PasswordConfirmation"
