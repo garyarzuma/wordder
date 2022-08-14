@@ -1,6 +1,6 @@
 .create-user-form-box{
   position: relative;
-  width: 30%;
+  max-width:400px;
   min-width: 300px;
   margin: 0 auto;
   height: auto;
@@ -27,9 +27,16 @@
 }
 
 .input-box{
-  width: 100%;
+  width: 90%;
+  border-color:black
 }
 
 input:focus{
   border:2px solid rgb(146, 146, 146)
+}
+
+.error-border{
+  border-color:red;
+  border-width:2px;
+  width:90%
 }

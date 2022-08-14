@@ -25,9 +25,10 @@ const Wordder =  () => {
   const [showSolution, setShowSolution] = useState(false)
   const [currentGuess, setCurrentGuess] = useState()
   const [graph,setGraph] = useState(buildGraph())
-  const [message, setMessage] = useState(null)
+  const [message, setMessage] = useState([null,5])
   const [firstTime, setFirstTime] = useState(true)
   const [endGameFreeze, setEndGameFreeze] = useState(false)
+  const [myTimeOut, setTimeOut] = useState(null)
 
   const dispatch = useDispatch()
   const toWord = useSelector(state => state.words.toWord)
@@ -55,6 +56,17 @@ const Wordder =  () => {
     }
   },[currentGuess])
 
+  useEffect(() => {
+    if(myTimeOut){
+      clearTimeout(myTimeOut)
+    }
+    setTimeOut(
+      setTimeout( () =>
+        setMessage([null,5]),5000
+      )
+    )
+  },[message]) //always triggers anytime a message is set due to Math.random part
+
   const initiateGame = () => {
     let myGraph = buildGraph()
     let answer = traverseGraph(fromCustWord,toCustWord,correctGuessesArray)
@@ -73,7 +85,7 @@ const Wordder =  () => {
     }
     const hotOrColdFrom = correctGuessesArray[correctGuessesArray.length-1] || fromCustWord
     setHotOrColdSteps(traverseGraph(hotOrColdFrom, toCustWord,correctGuessesArray)[0])
-    setMessage(null)
+    setMessage([null, 5])
     setShowSolution(false)
   }
 
@@ -86,7 +98,7 @@ const Wordder =  () => {
     console.log('correctGuessesArray in handleGuyess function: ',correctGuessesArray)
     correctGuessesArray.forEach(word => {
       if (word === currentGuess) {
-        setMessage('Guesses can\'t repeat!')
+        setMessage(['Guesses can\'t repeat!',Math.random()])
         goodGuess = false
       }
     })
@@ -105,10 +117,10 @@ const Wordder =  () => {
             dispatch(setCorrectGuessesArray([...correctGuessesArray, currentGuess]))
             setHotOrColdSteps(0)
             if(correctGuessesArray.length === minSteps){
-              setMessage(`Success! You found a Wordder in the minimum amount of ${correctGuessesArray.length} steps!`)
+              setMessage([`Success! You found a Wordder in the minimum amount of ${correctGuessesArray.length} steps!`,Math.random()])
             }
             else{
-              setMessage(`Success! You found a Wordder in ${correctGuessesArray.length} steps! The minimum possible steps is ${minSteps}`)
+              setMessage([`Success! You found a Wordder in ${correctGuessesArray.length} steps! The minimum possible steps is ${minSteps}`,Math.random()])
             }
             setEndGameFreeze(true)
             //update stats if logged in and user.email is not null
@@ -117,7 +129,7 @@ const Wordder =  () => {
                 await statsService.updateStats({ email:loggedIn, newGuess:correctGuessesArray.length, idealGuess:minSteps })
               } catch (exception) {
                 console.log('TOKEN EXPIRED')
-                setMessage(exception.response.data.error)
+                setMessage([exception.response.data.error ,Math.random()])
               }
             }
           }
@@ -127,16 +139,16 @@ const Wordder =  () => {
             let prevHotOrColdSteps = hotOrColdSteps
             let newHotOrColdSteps = traverseGraph(prevGuess,toWord,correctGuessesArray)[0]
             setHotOrColdSteps(newHotOrColdSteps)
-            setMessage(handleHotOrCold(prevHotOrColdSteps, newHotOrColdSteps))
+            setMessage([handleHotOrCold(prevHotOrColdSteps, newHotOrColdSteps), Math.random()])
           }
         }
         else{
-          setMessage('Guesses must be one letter apart!')
+          setMessage(['Guesses must be one letter apart!',Math.random()])
         }
       }
       else {
         if(currentGuess !== '') {
-          setMessage('Guess was NOT a valid 4 letter word!')
+          setMessage(['Guess was NOT a valid 4 letter word!',Math.random()])
         }
       }
     }
@@ -159,14 +171,14 @@ const Wordder =  () => {
 
   const handleClearClick = () => {
     dispatch(setCorrectGuessesArray([fromWord]))
-    setMessage(null)
+    setMessage([null, 5])
     setEndGameFreeze(false)
     prevGuess = fromWord
     setHotOrColdSteps(minSteps)
   }
 
   const handleUndoClick = () => {
-    setMessage(null)
+    setMessage([null, 5])
     setEndGameFreeze(false)
     if(correctGuessesArray.length > 1){
       const newArray = correctGuessesArray.slice(0,-1)
@@ -191,7 +203,7 @@ const Wordder =  () => {
           <div>Steps to Go</div>
         </div>
       </div>
-      <Notification message={message}/>
+      <Notification message={message[0]}/>
       <div className = "guessArray">
         {correctGuessesArray.map( (guess) => {
           return(

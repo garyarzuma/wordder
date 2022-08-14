@@ -7,10 +7,12 @@ const Footer = () => {
   return(
     <div className="footer">
       <div className = "footer-container">
+        <div className='footer-element'>
+          Developed by Gary Arzumanyan
+        </div>
         <a className = "footer-element" href="https://github.com/garyarzuma">
-            Developed by Gary Arzumanyan
+          <FontAwesomeIcon className='github-square'icon={faGithubSquare} size="xl" />
         </a>
-        <FontAwesomeIcon className='github-square'icon={faGithubSquare} size="xl" />
       </div>
     </div>
   )
