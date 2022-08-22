@@ -2,6 +2,7 @@
 //module.exports = ["foil","fail","fall", "pall", "pole", "poll", "pool", "cool", "fool", "foul", "pope", "pale", "sale", "page", "sage"]
 export default ['aahs',
   'abbe',
+  'gary',
   'abbr',
   'abed',
   'abet',

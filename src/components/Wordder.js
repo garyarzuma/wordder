@@ -38,21 +38,17 @@ const Wordder =  () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(fromCustWord !== undefined)
-      initiateGame()
-    else
-    if(!endGameFreeze){
-      handleNewGameClick()
-    }
-  },[fromCustWord])
+    initiateGame()
+  }, [fromCustWord])
 
   useEffect(() => {
     if(firstTime){
       setFirstTime(false)
     }
-    else
-    if(!endGameFreeze) {
-      handleGuess()
+    else{
+      if(!endGameFreeze) {
+        handleGuess()
+      }
     }
   },[currentGuess])
 
@@ -68,23 +64,23 @@ const Wordder =  () => {
   },[message]) //always triggers anytime a message is set due to Math.random part
 
   const initiateGame = () => {
+    setEndGameFreeze(false)
     let myGraph = buildGraph()
-    let answer = traverseGraph(fromCustWord,toCustWord,correctGuessesArray)
+    fromCustWord = fromCustWord || 'hire'
+    toCustWord   = toCustWord || 'gary'
+    let answer = traverseGraph(fromCustWord,toCustWord,[fromCustWord])
     if (answer === null){
       navigate('/invalidwords')
       return
     }
     dispatch(setFromWord(fromCustWord))
     dispatch(setToWord(toCustWord))
+    dispatch(setCorrectGuessesArray([fromCustWord]))
     setMinSteps(answer[0])
+    setHotOrColdSteps(answer[0])
     setAnswerArray(answer[1])
     setGraph(myGraph)
     prevGuess = fromCustWord
-    if(correctGuessesArray.length < 1) {
-      dispatch(setCorrectGuessesArray([fromCustWord]))
-    }
-    const hotOrColdFrom = correctGuessesArray[correctGuessesArray.length-1] || fromCustWord
-    setHotOrColdSteps(traverseGraph(hotOrColdFrom, toCustWord,correctGuessesArray)[0])
     setMessage([null, 5])
     setShowSolution(false)
   }
