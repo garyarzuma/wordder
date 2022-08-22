@@ -66,8 +66,8 @@ const Wordder =  () => {
   const initiateGame = () => {
     setEndGameFreeze(false)
     let myGraph = buildGraph()
-    fromCustWord = fromCustWord || 'cats'
-    toCustWord   = toCustWord || 'sage'
+    fromCustWord = fromCustWord || 'hire'
+    toCustWord   = toCustWord || 'gary'
     let answer = traverseGraph(fromCustWord,toCustWord,[fromCustWord])
     if (answer === null){
       navigate('/invalidwords')

@@ -1,5 +1,6 @@
 export default ['abed',
   'abet',
+  'gary',
   'able',
   'ably',
   'abut',
