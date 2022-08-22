@@ -7,10 +7,14 @@ export const useField = (type) => {
     setValue(event.target.value.toUpperCase())
   }
 
-  const maxLength = 4
+  const maxLength = 1
 
   const onReset = () => {
     setValue('')
+  }
+
+  const setMyValue = (value) => {
+    setValue(value)
   }
 
   return {
@@ -18,6 +22,7 @@ export const useField = (type) => {
     value,
     onChange,
     onReset,
-    maxLength
+    maxLength,
+    setMyValue
   }
 }
