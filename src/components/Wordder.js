@@ -208,10 +208,11 @@ const Wordder =  () => {
           )
         })}
       </div>
-      <Guessboxes setCurrentGuess={setCurrentGuess} />
+      {!endGameFreeze && <Guessboxes setCurrentGuess={setCurrentGuess} guesses = {correctGuessesArray} target = {toWord} />}
 
       <div className="start-target-container">
-        <Letterboxes word = {toWord.toUpperCase()}/>
+        {!endGameFreeze &&
+           <Letterboxes word = {toWord.toUpperCase()}/>}
       </div>
 
       <br/>

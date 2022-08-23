@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useField } from '../hooks/useField'
 import './styles/Guessboxes.css'
 
-const Guessboxes= ({ setCurrentGuess }) => {
+const Guessboxes= ({ setCurrentGuess, guesses, target }) => {
 
   const handleSubmit = (event) =>  {
     event.preventDefault()
@@ -22,6 +22,16 @@ const Guessboxes= ({ setCurrentGuess }) => {
     let input = document.getElementById('guess-1')
     input.focus()
   }, [])
+
+  useEffect(() => {
+    if (guesses[guesses.length-1] !== target) {
+      guess1.onReset()
+      guess2.onReset()
+      guess3.onReset()
+      guess4.onReset()
+      document.getElementById('guess-1').focus()
+    }
+  },[guesses]) //resets boxes to blank when a correct guess is made and this updates
 
   const onKeyUp = (event) => {
     console.log(event)
