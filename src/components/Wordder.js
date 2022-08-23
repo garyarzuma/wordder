@@ -204,7 +204,7 @@ const Wordder =  () => {
       <div className = "guessArray">
         {correctGuessesArray.map( (guess) => {
           return(
-            <Letterboxes key={Math.floor(Math.random()*(1000000))} word = {guess.toUpperCase()}/>
+            <Letterboxes key={Math.floor(Math.random()*(1000000))} word = {guess} target = {toWord}/>
           )
         })}
       </div>
@@ -212,7 +212,7 @@ const Wordder =  () => {
 
       <div className="start-target-container">
         {!endGameFreeze &&
-           <Letterboxes word = {toWord.toUpperCase()}/>}
+           <Letterboxes word = {toWord} target = {toWord}/>}
       </div>
 
       <br/>

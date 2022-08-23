@@ -1,5 +1,5 @@
 .guessBox, .letterBox {
-	border: 1px solid rgb(136, 136, 136);
+	border: 2px solid rgb(136, 136, 136);
       background-color: rgb(255, 255, 255);
       resize: none;
       outline: none;
@@ -8,13 +8,17 @@
 	text-align:center;
 	width: 1.4em;
 	height: 1.4em;
-	border-radius: 10px;
 	margin-top:10px;
+	border-radius: 5px;
 	margin:4px;
 	margin-bottom:10px;
 	font-size: 2em;
 	padding:0px;
 	
+}
+
+.guessBox:focus{
+	border: 2px solid black;
 }
 
 .letterBox {
@@ -31,4 +35,14 @@
 	display:flex;
 	align-items:center;
 	justify-content: center;
+}
+
+#green{
+	background-color:rgb(150, 219, 150)
+}
+
+#dark-green{
+	background-color:rgb(31, 141, 31);
+	color: white;
+	border-color: black;
 }
