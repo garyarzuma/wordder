@@ -6,9 +6,7 @@ const Guessboxes= ({ setCurrentGuess, guesses, target }) => {
 
   const handleSubmit = (event) =>  {
     event.preventDefault()
-    console.log(event)
-    let guess = guess1.value + guess2.value + guess3.value + guess4.value
-    console.log(guess)
+    let guess = guess1.domStuff.value + guess2.domStuff.value + guess3.domStuff.value + guess4.domStuff.value
     setCurrentGuess(guess.toLowerCase())
   }
   const guess1 = useField('guess1')
@@ -25,16 +23,15 @@ const Guessboxes= ({ setCurrentGuess, guesses, target }) => {
 
   useEffect(() => {
     if (guesses[guesses.length-1] !== target) {
-      guess1.onReset()
-      guess2.onReset()
-      guess3.onReset()
-      guess4.onReset()
+      guess1.domStuff.onReset()
+      guess2.domStuff.onReset()
+      guess3.domStuff.onReset()
+      guess4.domStuff.onReset()
       document.getElementById('guess-1').focus()
     }
   },[guesses]) //resets boxes to blank when a correct guess is made and this updates
 
   const onKeyUp = (event) => {
-    console.log(event)
     if (event.keyCode === 13){ //for enter
       handleSubmit(event)
     }
@@ -77,10 +74,10 @@ const Guessboxes= ({ setCurrentGuess, guesses, target }) => {
 
     <div className="guessboxes">
       <form onSubmit={handleSubmit}>
-        <input className="guessBox" onKeyUp = {onKeyUp} id='guess-1' {...guess1}/>
-        <input className="guessBox" onKeyUp = {onKeyUp} id='guess-2' {...guess2}/>
-        <input className="guessBox" onKeyUp = {onKeyUp} id='guess-3' {...guess3}/>
-        <input className="guessBox" onKeyUp = {onKeyUp} id='guess-4' {...guess4}/>
+        <input className="guessBox" onKeyUp = {onKeyUp} id='guess-1' {...guess1.domStuff}/>
+        <input className="guessBox" onKeyUp = {onKeyUp} id='guess-2' {...guess2.domStuff}/>
+        <input className="guessBox" onKeyUp = {onKeyUp} id='guess-3' {...guess3.domStuff}/>
+        <input className="guessBox" onKeyUp = {onKeyUp} id='guess-4' {...guess4.domStuff}/>
       </form>
     </div>
 

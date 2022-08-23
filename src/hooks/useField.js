@@ -18,11 +18,11 @@ export const useField = (type) => {
   }
 
   return {
-    type,
-    value,
-    onChange,
-    onReset,
-    maxLength,
+    domStuff: { type,
+      value,
+      onChange,
+      onReset,
+      maxLength },
     setMyValue
   }
 }
