@@ -7,7 +7,7 @@ const Solution = ({ answerArray,toWord }) => {
     <div className="answer-list">
       {answerArray.map(word => {
         return (
-          <div key={word} className="answer">{word.toUpperCase()}----{'>'}</div>
+          <div key={word} className="answer"> {word.toUpperCase()} ➜ </div>
         )
       })}
       <div className="answer" >{toWord.toUpperCase()}</div>
