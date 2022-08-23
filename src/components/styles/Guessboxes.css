@@ -1,4 +1,4 @@
-.guessBox {
+.guessBox, .letterBox {
 	border: 1px solid rgb(136, 136, 136);
       background-color: rgb(255, 255, 255);
       resize: none;
@@ -14,8 +14,21 @@
 	margin-bottom:10px;
 	font-size: 2em;
 	padding:0px;
+	
+}
+
+.letterBox {
+	display:flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .guessBox{
 	caret-color: transparent;
+}
+
+.letterBoxes{
+	display:flex;
+	align-items:center;
+	justify-content: center;
 }

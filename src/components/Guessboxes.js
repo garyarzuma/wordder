@@ -24,6 +24,7 @@ const Guessboxes= ({ setCurrentGuess }) => {
   }, [])
 
   const onKeyUp = (event) => {
+    console.log(event)
     if (event.keyCode === 13){ //for enter
       handleSubmit(event)
     }
