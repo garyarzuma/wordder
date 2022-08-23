@@ -5,6 +5,7 @@ import wordList from '../graphs/wordLists/esl_forum_word_list.js'
 import  traverseGraph from '../graphs/traverseGraph'
 import Solution from './Solution'
 import Guessboxes from './Guessboxes'
+import Letterboxes from './LetterBoxes'
 import buildGraph  from '../graphs/utils/buildGraph'
 import Notification from './Notification'
 import { useParams,  useNavigate } from 'react-router-dom'
@@ -203,14 +204,15 @@ const Wordder =  () => {
       <div className = "guessArray">
         {correctGuessesArray.map( (guess) => {
           return(
-            <div key={Math.floor(Math.random()*(1000000))}>{guess.toUpperCase()}</div>
+            <Letterboxes key={Math.floor(Math.random()*(1000000))} word = {guess} target = {toWord}/>
           )
         })}
       </div>
-      <Guessboxes setCurrentGuess={setCurrentGuess} handleGuess={handleGuess}/>
+      {!endGameFreeze && <Guessboxes setCurrentGuess={setCurrentGuess} guesses = {correctGuessesArray} target = {toWord} />}
 
       <div className="start-target-container">
-        <div>{toWord.toUpperCase()}</div>
+        {!endGameFreeze &&
+           <Letterboxes word = {toWord} target = {toWord}/>}
       </div>
 
       <br/>

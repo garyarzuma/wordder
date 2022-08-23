@@ -7,17 +7,22 @@ export const useField = (type) => {
     setValue(event.target.value.toUpperCase())
   }
 
-  const maxLength = 4
+  const maxLength = 1
 
   const onReset = () => {
     setValue('')
   }
 
+  const setMyValue = (value) => {
+    setValue(value)
+  }
+
   return {
-    type,
-    value,
-    onChange,
-    onReset,
-    maxLength
+    domStuff: { type,
+      value,
+      onChange,
+      onReset,
+      maxLength },
+    setMyValue
   }
 }
