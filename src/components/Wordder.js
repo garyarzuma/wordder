@@ -172,6 +172,7 @@ const Wordder =  () => {
     setEndGameFreeze(false)
     prevGuess = fromWord
     setHotOrColdSteps(minSteps)
+    setCurrentGuess('')
   }
 
   const handleUndoClick = () => {
@@ -189,6 +190,7 @@ const Wordder =  () => {
   return (
     <div className="Home">
       <h1 className='wordder-heading'>Wordder!</h1>
+      <div className='wordder-subheading'>Free Play</div>
       <Rules />
       <div className="start-target-minSteps-current-container">
         <div>

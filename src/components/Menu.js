@@ -31,7 +31,8 @@ const Menu = () => {
         <div>
           <img className='logo' src={wordderLogo} alt="wordder-logo" />
         </div>
-        <Link className="link" to={`/${fromWord}/${toWord}`}>Home</Link>
+        <Link className="link" to={'/'}>Daily Wordder</Link>
+        <Link className="link" to={`/${fromWord}/${toWord}`}>Free Play</Link>
         <Link className="link" to='/stats'>Statistics</Link>
       </div>
       <div className="float-right-container">

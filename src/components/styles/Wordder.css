@@ -30,5 +30,16 @@ button:hover{
 .wordder-heading{
     font-family: wordderLogoFont;
     font-size:3em;
-    margin:20px;
+    margin:10px;
+}
+
+.wordder-subheading{
+    font-family: wordderLogoFont;
+    font-size:2em;
+    margin:5px;
+}
+
+.wordder-date{
+    font-size:1.5em;
+    margin:10px;
 }

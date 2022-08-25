@@ -1,6 +1,7 @@
 import './App.css'
 import React, { useEffect } from 'react'
 import Wordder from './components/Wordder'
+import DailyWordder from './components/DailyWordder'
 import Menu from './components/Menu'
 import InvalidWords from './components/InvalidWords'
 import Login from './components/Login'
@@ -40,7 +41,7 @@ function App() {
         <Routes>
           <Route path="/howtoplay" element={<HowTo/>} />
           <Route path="/:fromCustWord/:toCustWord"  element={<Wordder/>} />
-          <Route path="/" element={<Wordder/>} />
+          <Route path="/" element={<DailyWordder/>} />
           <Route path="/invalidwords" element={<InvalidWords />} />
           <Route path="/invalidwords/invalidwords" element={<InvalidWords />} />
           <Route path="/login" element={<Login />} />
