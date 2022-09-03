@@ -42,6 +42,13 @@ test.each(dateTable)('Word of %s actually makes a valid path', (date) => {
     </Provider>
   )
 
-  let element = screen.getByText('Wordder!')
+  const formattedDate = date.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  })
+
+
+  let element = screen.getByText(formattedDate)
   expect(element).toBeDefined()
 })
