@@ -73,7 +73,7 @@ const DailyWordder =  () => {
   }
 
   const initiateGame = () => {
-    setTodaysWords(myDate.getFullYear() * myDate.getMonth() * myDate.getDate())
+    setTodaysWords(myDate.getFullYear() * myDate.getMonth() + 1 * myDate.getDate())
 
     let myGraph = buildGraph()
     setGraph(myGraph)
