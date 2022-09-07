@@ -113,7 +113,7 @@ const DailyWordder =  () => {
             //update stats if logged in and user.email is not null
             if(loggedIn){
               try {
-                await statsService.updateStats({ email:loggedIn, newGuess:correctGuessesArray.length, idealGuess:minSteps })
+                await statsService.updateDailyStats({ email:loggedIn, newGuess:correctGuessesArray.length, idealGuess:minSteps })
               } catch (exception) {
                 console.log('TOKEN EXPIRED')
                 setMessage(exception.response.data.error)

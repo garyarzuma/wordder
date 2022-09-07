@@ -15,9 +15,17 @@ const updateStats = async credentials => {
   return response.data
 }
 
+const updateDailyStats = async credentials => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  const response = await axios.post(baseUrl+'/updateStats/daily', credentials, config)
+  return response.data
+}
+
 const getStats = async credentials => {
   const response = await axios.post(baseUrl+'/getStats', credentials)
   return response.data
 }
 
-export default { updateStats, getStats, setToken }
+export default { updateStats, updateDailyStats, getStats, setToken }
