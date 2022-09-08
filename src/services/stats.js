@@ -24,7 +24,7 @@ const updateDailyStats = async credentials => {
 }
 
 const getStats = async credentials => {
-  const response = await axios.post(baseUrl+'/getStats', credentials)
+  const response = await axios.get(baseUrl+`/getStats/${credentials.email}`, credentials)
   return response.data
 }
 

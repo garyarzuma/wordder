@@ -55,6 +55,7 @@ const DailyWordder =  () => {
     let from = ''
     let to = ''
     let increment = 0
+
     while (answer === null || answer[0]<2){
       increment += 1
       let toIndex = ((dateInteger*9) + increment) % (wordList.length-1)
