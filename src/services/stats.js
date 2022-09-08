@@ -24,8 +24,16 @@ const updateDailyStats = async credentials => {
 }
 
 const getStats = async credentials => {
-  const response = await axios.get(baseUrl+`/getStats/${credentials.email}`, credentials)
+  const response = await axios.get(baseUrl+`/getStats/${credentials.email}`)
   return response.data
 }
 
-export default { updateStats, updateDailyStats, getStats, setToken }
+const getLastDayPlayed = async email => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  const response = await axios.get(baseUrl+`/getLastDatePlayed/${email}`, config)
+  return response.data
+}
+
+export default { updateStats, updateDailyStats, getStats, setToken, getLastDayPlayed }

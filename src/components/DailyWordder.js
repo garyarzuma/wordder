@@ -17,7 +17,7 @@ const DailyWordder =  () => {
 
   const loggedIn = useSelector(state => state.user.email)
   const [minSteps, setMinSteps] = useState(null)
-  const [answerArray, setAnswerArray] = useState([])
+  //const [answerArray, setAnswerArray] = useState([])
   const [currentGuess, setCurrentGuess] = useState()
   const [graph,setGraph] = useState(buildGraph())
   const [message, setMessage] = useState(null)
@@ -34,10 +34,21 @@ const DailyWordder =  () => {
   const [fromWord, setFromWord] = useState('')
   const [correctGuessesArray, setCorrectGuessesArray] = useState([])
 
-  useEffect(() => {
-    initiateGame()
-    console.log(myDate)
-  }, [])
+  useEffect( () => {
+    let lastDatePlayed = new Date(2000,5,2) //using this so the default is to let all play the game
+    console.log('Logged In Status: ',loggedIn)
+    if (loggedIn){
+      console.log('we are logged in and fetching last date played')
+      const fetchData = async () => {
+        lastDatePlayed = await statsService.getLastDayPlayed(loggedIn)
+        initiateGame(lastDatePlayed)
+      }
+      fetchData().catch(console.error)
+    }
+    else {
+      initiateGame(lastDatePlayed)
+    }
+  }, [loggedIn])
 
   useEffect(() => {
     if(firstTime){
@@ -68,18 +79,23 @@ const DailyWordder =  () => {
     setToWord(to)
     setCorrectGuessesArray([from])
     setMinSteps(answer[0])
-    setAnswerArray(answer[1])
-    console.log(answerArray)
+    //setAnswerArray(answer[1]) might need this one later
     prevGuess = from
   }
 
-  const initiateGame = () => {
+  const initiateGame = (lastDatePlayed) => {
+    //If already played today must say come back tomorrow
+    lastDatePlayed = new Date(lastDatePlayed)
+    if (lastDatePlayed.getDate() === myDate.getDate()){
+      setMessage('You have already played today\'s Wordder! Come back tomorrow for more fun!')
+      setEndGameFreeze (true)
+    }
+    else {
+      setMessage(null)
+    }
     setTodaysWords(myDate.getFullYear() * myDate.getMonth() + 1 * myDate.getDate())
-
     let myGraph = buildGraph()
     setGraph(myGraph)
-
-    setMessage(null)
   }
 
   const handleGuess = async () => {
@@ -161,14 +177,18 @@ const DailyWordder =  () => {
       <div className='wordder-date'>{ formattedDate }</div>
       <Rules />
       <Notification message={message}/>
-      <div className = "guessArray">
-        {correctGuessesArray.map( (guess) => {
-          return(
-            <Letterboxes key={Math.floor(Math.random()*(1000000))} word = {guess} target = {toWord}/>
-          )
-        })}
-      </div>
-      {!endGameFreeze && <Guessboxes setCurrentGuess={setCurrentGuess} guesses = {correctGuessesArray} target = {toWord} />}
+      {!endGameFreeze &&
+        <div className = "guessArray">
+          {correctGuessesArray.map( (guess) => {
+            return(
+              <Letterboxes key={Math.floor(Math.random()*(1000000))} word = {guess} target = {toWord}/>
+            )
+          })}
+        </div>
+      }
+      {!endGameFreeze &&
+        <Guessboxes setCurrentGuess={setCurrentGuess} guesses = {correctGuessesArray} target = {toWord} />
+      }
 
       <div className="start-target-container">
         {!endGameFreeze &&

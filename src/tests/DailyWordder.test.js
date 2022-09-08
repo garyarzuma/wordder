@@ -19,7 +19,7 @@ const today = new Date()
 const [year, month, day] = [ today.getFullYear(), today.getMonth(), today.getDate()]
 //Tests next 60 days of words//
 for (let i=1; i<60; i++){
-  const date = new Date(year,month+2,day+i)
+  const date = new Date(year,month,day+i)
   dateTable.push(date)
 }
 
